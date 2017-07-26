@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/RenovateProject.iml" filepath="$PROJECT_DIR$/RenovateProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library_downMenue/library_downMenue.iml" filepath="$PROJECT_DIR$/library_downMenue/library_downMenue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pictruetest/pictruetest.iml" filepath="$PROJECT_DIR$/pictruetest/pictruetest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recyclerViewlibrary/recyclerViewlibrary.iml" filepath="$PROJECT_DIR$/recyclerViewlibrary/recyclerViewlibrary.iml" />
+    </modules>
+  </component>
+</project>

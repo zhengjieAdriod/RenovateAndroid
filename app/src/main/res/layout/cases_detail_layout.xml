@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.baiducloud.dawnoct.renovateproject.Modules.detailCase.DetailActivity">
+
+    <RelativeLayout
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:showIn="@layout/app_bar_main">
+
+        <RelativeLayout
+            android:id="@+id/worker_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/worker_bg"
+          >
+
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:paddingTop="20dp"
+                android:id="@+id/worker_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"
+                />
+
+            <TextView
+                android:paddingTop="20dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/worker_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/worker_img"
+                android:text="装修管家:张东起" />
+
+            <Button
+                android:paddingTop="20dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/worker_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/worker_name"
+                android:background="@color/worker_bg"
+                android:gravity="center"
+                android:text="我要参观" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:id="@+id/construct_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/worker_info"
+            android:drawableLeft="@mipmap/drop_down_checked"
+            android:paddingLeft="15dp"
+            android:text="施工信息"
+            android:textSize="17sp" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/construct_info"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line"
+            android:layout_marginLeft="15dp"
+            android:text="开工日期:" />
+
+        <TextView
+            android:id="@+id/start_date01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line"
+            android:layout_toRightOf="@+id/start_date"
+            android:text="2017-07-08"
+            android:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/predict_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start_date"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="预计工期:" />
+
+        <TextView
+            android:id="@+id/predict_date01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start_date"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/predict_date"
+            android:text="5天"
+            android:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/scheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/predict_date"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="施工方案:" />
+
+        <TextView
+            android:id="@+id/scheme01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/predict_date"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/scheme"
+            android:text="__"
+            android:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/construct_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/scheme"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@mipmap/drop_down_checked"
+            android:paddingLeft="15dp"
+            android:text="施工进度"
+            android:textSize="17sp" />
+
+        <View
+            android:id="@+id/line01"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/construct_progress"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="@color/gray" />
+
+        <RelativeLayout
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:id="@+id/start_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line01">
+
+            <TextView
+                android:id="@+id/start_in_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/arrow"
+                android:text="开工进场" />
+
+            <TextView
+                android:id="@+id/start_in_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="2017/08/09"
+                android:textColor="@color/gray"
+                android:textSize="11sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/start_in_imags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/start_in_name"
+                android:paddingTop="15dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:id="@+id/protection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start_in"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/protection_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/arrow"
+                android:text="遮蔽保护" />
+
+            <TextView
+                android:id="@+id/protection_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="2017/08/09"
+                android:textColor="@color/gray"
+                android:textSize="11sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/protection_imags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/protection_name"
+                android:paddingTop="15dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:id="@+id/work_site"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/protection"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/work_site_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/arrow"
+                android:text="施工现场" />
+
+            <TextView
+                android:id="@+id/work_site_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="2017/08/09"
+                android:textColor="@color/gray"
+                android:textSize="11sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/work_site_imags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/work_site_name"
+                android:paddingTop="15dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:id="@+id/finish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/work_site"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/finish_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/arrow"
+                android:text="完工验收" />
+
+            <TextView
+                android:id="@+id/finish_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="2017/08/09"
+                android:textColor="@color/gray"
+                android:textSize="11sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/finish_imags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/finish_name"
+                android:paddingTop="15dp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:id="@+id/line02"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/finish"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/gray" />
+
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line02">
+
+            <TextView
+                android:id="@+id/comment_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/drop_down_checked"
+                android:text="业主评价:"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/comment_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/drop_down_selected_icon" />
+
+            <TextView
+                android:id="@+id/owner_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/comment_tv"
+                android:text="业主***" />
+
+            <TextView
+                android:id="@+id/wu_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/comment_tv"
+                android:layout_toRightOf="@+id/owner_name" />
+
+            <TextView
+                android:id="@+id/comment_des"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/owner_name"
+                android:text="很好很喜欢,真的不错哈" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

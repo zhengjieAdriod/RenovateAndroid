@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+        applicationId "com.baiducloud.dawnoct.renovateproject"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    configurations.all {
+//防止出现Execution failed for task ':prepareDebugAndroidTestDependencies'. >
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile "com.android.support:cardview-v7:25.3.1"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile 'com.zhy:magic-viewpager:1.0.1'
+    //轮播
+    // butterknife
+    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+    compile 'com.jakewharton:butterknife:8.2.1'
+    // retrofit网络相关
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    // rxjava
+    compile 'io.reactivex:rxjava:1.1.9'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    compile 'com.trello:rxlifecycle:1.0'
+    //解决RxJava内存泄漏
+    //如果你想把自己的RxJava1.0的迁移到2.0的版本，可以使用这个库RxJava2Interop ,在github上可以找到，它可以在Rxjava1.0和2.0之间相互转换，也就是说，不仅可以把1.0的代码迁移到2.0，你还可以把2.0的代码迁移到1.0
+    compile 'com.trello:rxlifecycle-components:1.0'
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
+    // logger
+    compile 'com.orhanobut:logger:1.15'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile project(':recyclerViewlibrary')
+    compile project(':library_downMenue')
+    //鸿洋适配
+    compile 'com.zhy:autolayout:1.4.5'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    //弹窗
+    compile 'com.orhanobut:dialogplus:1.11@aar'
+    //运行时权限
+    compile 'com.yanzhenjie:permission:1.0.3'
+    compile 'com.yanzhenjie:album:1.0.0'
+
+
+
+}

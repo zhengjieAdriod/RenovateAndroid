@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.baiducloud.dawnoct.renovateproject.Modules.postPost.AddNewCaseActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 遮挡状态栏透明的部分 -->
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:visibility="visible">
+                <!--layout_scrollFlags决定了是否跟随滚动-->
+                <!--app:layout_scrollFlags="scroll|enterAlways|snap"-->
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/tool_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:navigationIcon="@mipmap/back"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="施工进度上传"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+                </android.support.v7.widget.Toolbar>
+            </android.support.design.widget.AppBarLayout>
+            <!--加marginTop,为了解决ToolBar覆盖Viewpager的问题-->
+            <RelativeLayout
+                android:id="@+id/re_tab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:background="#ea9999">
+
+                <LinearLayout
+                    android:id="@+id/head_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/head_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="项目展示图"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <com.baiducloud.dawnoct.renovateproject.Wedgits.MyGridView
+                        android:id="@+id/gridview_head"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:columnWidth="10dp"
+                        android:horizontalSpacing="0dp"
+                        android:numColumns="2" />
+
+                    <Button
+                        android:id="@+id/head_post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="singlePost"
+                        android:tag="head"
+                        android:text="post"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/district_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/head_ll"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/district_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="所在区域"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <EditText
+                        android:id="@+id/district_ed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="小区名称" />
+
+                    <Button
+                        android:id="@+id/district_in_post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="post"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/village_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/district_ll"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/village_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="小区名称"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <EditText
+                        android:id="@+id/village_ed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="小区名称" />
+
+                    <Button
+                        android:id="@+id/village_in_post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="singlePost"
+                        android:tag="head"
+                        android:text="post"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/service_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/village_ll"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/service_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="服务项目"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <EditText
+                        android:id="@+id/service_ed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="服务项目" />
+
+                    <Button
+                        android:id="@+id/service_in_post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="chooseService"
+                        android:tag="service"
+                        android:text="选择项目" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/predict_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/service_ll"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/predict_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="预计工期"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <EditText
+                        android:id="@+id/predict_ed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="预计工期" />
+
+                    <Button
+                        android:id="@+id/predict_post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="chooseDate"
+                        android:tag="head"
+                        android:text="选择日期" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fact_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/predict_ll"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/fact_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="实际工期"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <EditText
+                        android:id="@+id/fact_ed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="实际工期" />
+
+                    <Button
+                        android:id="@+id/_post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="singlePost"
+                        android:tag="head"
+                        android:text="post"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/create_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/fact_ll"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/create_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="开工日期"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <EditText
+                        android:id="@+id/create_ed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="开工日期" />
+
+                    <Button
+                        android:id="@+id/create_post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="singlePost"
+                        android:tag="head"
+                        android:text="post"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/state_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/create_ll"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/state_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="项目状态"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <EditText
+                        android:id="@+id/state_ed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="项目状态" />
+
+                    <Button
+                        android:id="@+id/state_post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="chooseState"
+                        android:text="修改状态" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/query_bt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/state_ll"
+                    android:onClick="singlePost"
+                    android:tag="head"
+                    android:text="提交基本信息" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/query_bt"
+                    android:background="#fff" />
+
+                <LinearLayout
+                    android:id="@+id/start_in_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/start_in_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="开工进场"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <com.baiducloud.dawnoct.renovateproject.Wedgits.MyGridView
+                        android:id="@+id/gridview_01"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:columnWidth="10dp"
+                        android:horizontalSpacing="0dp"
+                        android:numColumns="2" />
+
+                    <Button
+                        android:id="@+id/start_in_post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="singlePost"
+                        android:tag="start"
+                        android:text="post" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/protection_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/start_in_ll"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/protection_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="遮蔽措施"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <com.baiducloud.dawnoct.renovateproject.Wedgits.MyGridView
+                        android:id="@+id/gridview_02"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:columnWidth="10dp"
+                        android:horizontalSpacing="0dp"
+                        android:numColumns="2" />
+
+                    <Button
+                        android:id="@+id/protection_post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="singlePost"
+                        android:tag="protect"
+                        android:text="post" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/WorkSite_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/protection_ll"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/WorkSite_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="施工现场"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <com.baiducloud.dawnoct.renovateproject.Wedgits.MyGridView
+                        android:id="@+id/gridview_03"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:columnWidth="10dp"
+                        android:horizontalSpacing="0dp"
+                        android:numColumns="2" />
+
+                    <Button
+                        android:id="@+id/WorkSite__post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="singlePost"
+                        android:tag="work_site"
+                        android:text="post" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/finish_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/WorkSite_ll"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/finish_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="完工验收"
+                        android:textColor="#333333"
+                        android:textSize="19sp" />
+
+                    <com.baiducloud.dawnoct.renovateproject.Wedgits.MyGridView
+                        android:id="@+id/gridview_04"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:columnWidth="10dp"
+                        android:horizontalSpacing="0dp"
+                        android:numColumns="2" />
+
+                    <Button
+                        android:id="@+id/finish__post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="singlePost"
+                        android:tag="finish"
+                        android:text="post" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/bt_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:onClick="postInfoAll"
+                    android:padding="10dp"
+                    android:text="提交"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </android.support.design.widget.CoordinatorLayout>
+
+    </LinearLayout>
+</ScrollView>
