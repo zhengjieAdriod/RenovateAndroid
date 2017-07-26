@@ -342,6 +342,14 @@ public class UpadateCaseActivity extends BaseActivity {
             myAdapter04.setNetPhotos(photos);
         }
     }
+    //todo 使用弹窗,实现服务项目的选择
+    public void chooseService(View view) {
+
+    }
+    //todo 使用弹窗日历控件,实现开工日期的选择
+    public void chooseDate(View view) {
+
+    }
     //    public void postInfoAll(View view) {
 //        Editable text = editText.getText();
 //        mVillage = text.toString().trim();

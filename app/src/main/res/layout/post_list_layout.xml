@@ -39,6 +39,12 @@
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
         <!--加marginTop,为了解决ToolBar覆盖Viewpager的问题-->
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_project"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            app:srcCompat="@mipmap/add" />
         <RelativeLayout
             android:id="@+id/re_tab"
             android:layout_width="match_parent"
@@ -53,13 +59,7 @@
 
         </RelativeLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_project"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@mipmap/add" />
+
     </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

@@ -2,11 +2,12 @@ package com.baiducloud.dawnoct.renovateproject.Modules.postPost;
 
 import android.util.Log;
 
-import com.baiducloud.dawnoct.renovateproject.Modules.postPost.bean.Imagepxh;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.RetrofitService;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.PhotoesInfo;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
-import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.ResponceInfo;
+import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.RespondedInfo;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,8 @@ public class UpadateCasePresenter {
 
     /*上传图片*/
     public void updatePostData(Post post, Map<String, RequestBody> map) {
-        Observable<ResponceInfo> postObservable = RetrofitService.updatePostSnippetWith(post, map);
-        postObservable.subscribe(new Subscriber<ResponceInfo>() {
+        Observable<RespondedInfo> postObservable = RetrofitService.updatePostSnippetWith(post, map);
+        postObservable.subscribe(new Subscriber<RespondedInfo>() {
             @Override
             public void onCompleted() {
                 Log.e("zj", "");
@@ -41,9 +42,11 @@ public class UpadateCasePresenter {
             }
 
             @Override
-            public void onNext(ResponceInfo info) {
+            public void onNext(RespondedInfo info) {
                 Log.e("zj", "");
                 if ("200".equals(info.getCode())) {
+                    Post post1 = info.getPost();
+                    EventBus.getDefault().post(post1);
                     List<PhotoesInfo.Photo> photos = info.getPhotos();
                     if (photos.size() > 0)
                         mView.changeNetPhotos(photos);

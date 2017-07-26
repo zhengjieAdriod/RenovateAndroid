@@ -27,8 +27,9 @@ public class DownMenuAdapter extends BaseQuickAdapter<Post, BaseViewHolder> {
         ImageView imageView = (ImageView) helper.getView(R.id.img);
         Picasso.with(imageView.getContext())
                 .load("ff")
-                .placeholder(R.mipmap.qiaoqiao)
-                .error(R.mipmap.qiaoqiao)
+//                .resize(80,80)
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.detele)
                 .into(imageView);
         helper.setText(R.id.name, item.getDistrict() + item.getVillage());
         helper.setText(R.id.product, "刷新服务");

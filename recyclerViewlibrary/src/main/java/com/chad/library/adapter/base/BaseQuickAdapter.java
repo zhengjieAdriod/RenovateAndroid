@@ -435,11 +435,21 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
     }
 
     /**
-     * add one new data
+     * add one new data to bottom
      */
     public void addData(T data) {
         mData.add(data);
         notifyItemInserted(mData.size() + getHeaderLayoutCount());
+        compatibilityDataSizeChanged(1);
+    }
+
+    /**
+     * add one new data to top
+     */
+    public void addDataTop(T data) {
+//        mData.add(data);
+        mData.add(getHeaderLayoutCount(), data);
+        notifyItemInserted(getHeaderLayoutCount());
         compatibilityDataSizeChanged(1);
     }
 

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.baiducloud.dawnoct.renovateproject.ZNetService.RetrofitService;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
+import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.RespondedInfo;
 
 import java.util.Map;
 
@@ -24,8 +25,8 @@ public class AddCasePresenter {
 
 
     public void postNewData(Post post, Map<String, RequestBody> map) {
-        Observable<String> postObservable = RetrofitService.postSnippetWith(post, map);
-        postObservable.subscribe(new Subscriber<String>() {
+        Observable<RespondedInfo> postObservable = RetrofitService.postSnippetWith(post, map);
+        postObservable.subscribe(new Subscriber<RespondedInfo>() {
             @Override
             public void onCompleted() {
                 Log.e("zj", "");
@@ -37,10 +38,13 @@ public class AddCasePresenter {
             }
 
             @Override
-            public void onNext(String post) {
+            public void onNext(RespondedInfo info) {
                 Log.e("zj", "");
                 //跳转到列表页
-                mView.addPostFinish();
+                if ("200".equals(info.getCode())){
+                    Post post1 = info.getData().get(0);
+                    mView.addPostFinish(post1);
+                }
 
             }
         });

@@ -2,7 +2,7 @@ package com.baiducloud.dawnoct.renovateproject.Modules.casesList;
 
 import com.baiducloud.dawnoct.renovateproject.ZNetService.RetrofitService;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
-import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.ResponceInfo;
+import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.RespondedInfo;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -24,14 +24,14 @@ public class CasesPresenter {
 
 
     public void getData() {
-        Observable<ResponceInfo> cases = RetrofitService.getCasesTest();
-        cases.compose(mView.<ResponceInfo>bindToLife())//解决内存泄漏的框架
+        Observable<RespondedInfo> cases = RetrofitService.getCasesTest();
+        cases.compose(mView.<RespondedInfo>bindToLife())//解决内存泄漏的框架
                 .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
 
                     }
-                }).subscribe(new Subscriber<ResponceInfo>() {
+                }).subscribe(new Subscriber<RespondedInfo>() {
             @Override
             public void onCompleted() {
                 Logger.e("" + "");
@@ -43,7 +43,7 @@ public class CasesPresenter {
             }
 
             @Override
-            public void onNext(ResponceInfo res) {
+            public void onNext(RespondedInfo res) {
                 Logger.e("" + "");
                 List<Post> posts = res.getData();
                 mView.loadDataFirst(posts);

@@ -38,6 +38,9 @@
         <activity android:name=".Modules.postPost.AddNewCaseActivity" />
         <activity android:name=".Modules.postList.ListPostActivity" />
         <activity android:name=".Modules.postPost.UpadateCaseActivity" />
+        <activity android:name=".Modules.LoginWorker.LoginWorkerActivity" />
+        <activity android:name=".Modules.LoginWorker.NewPasswordActivity" />
+
         <activity
             android:name="com.yanzhenjie.album.AlbumActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

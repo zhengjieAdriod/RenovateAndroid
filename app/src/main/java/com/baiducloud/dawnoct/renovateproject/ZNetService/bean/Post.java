@@ -26,6 +26,7 @@ public class Post implements Serializable {
     private String predict;
     private String fact;
     private String state;
+    private String area;
     private ServiceBean service;
     private WorkerBean worker;
     private SchemeBean scheme;
@@ -119,6 +120,14 @@ public class Post implements Serializable {
 
     public void setScheme(SchemeBean scheme) {
         this.scheme = scheme;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 
 

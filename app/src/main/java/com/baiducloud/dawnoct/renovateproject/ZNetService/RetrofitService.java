@@ -6,7 +6,7 @@ import com.baiducloud.dawnoct.renovateproject.AndroidApplication;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.MsgInfo;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.PhotoesInfo;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
-import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.ResponceInfo;
+import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.RespondedInfo;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Snippet;
 import com.baiducloud.dawnoct.renovateproject.Zutils.NetUtil;
 import com.google.gson.Gson;
@@ -23,15 +23,12 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.CacheControl;
-import okhttp3.Headers;
 import okhttp3.Interceptor;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okio.Buffer;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -59,8 +56,8 @@ public class RetrofitService {
     private static final String TEST_HOST = "http://192.168.1.106:8087/action/";
     //    private static final String RENOVATE_HOST = "http://192.168.1.97:8000/post_by_page/";post_list
 //    private static final String RENOVATE_HOST = "http://192.168.1.97:8000/save_post/";
-    public static final String RENOVATE_HOST = "http://192.168.1.97:8000/";
-    public static final String RENOVATE_HOST_PHPTO = "http://192.168.1.97:8000";
+    public static final String RENOVATE_HOST = "http://192.168.1.96:8000/";
+    public static final String RENOVATE_HOST_PHPTO = "http://192.168.1.96:8000";
 
 
     private static MainApi mainApi;
@@ -173,7 +170,7 @@ public class RetrofitService {
     }
 
     /************************************ API *******************************************/
-    public static Observable<ResponceInfo> postLogin(MsgInfo msgInfo) {
+    public static Observable<RespondedInfo> postLogin(MsgInfo msgInfo) {
         return mainApi
                 .postLogin(new Gson().toJson(msgInfo))//传递json字符串
 //                .delay(3, TimeUnit.SECONDS)//模拟耗时
@@ -183,7 +180,7 @@ public class RetrofitService {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Observable<ResponceInfo> getProjects(MsgInfo msgInfo) {
+    public static Observable<RespondedInfo> getProjects(MsgInfo msgInfo) {
         String str = new Gson().toJson(msgInfo);
         return mainApi
                 .getProjects(str)//传递json字符串
@@ -203,7 +200,7 @@ public class RetrofitService {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Observable<ResponceInfo> getCasesTest() {
+    public static Observable<RespondedInfo> getCasesTest() {
         return mainApi
                 .getCasesTest()
                 .subscribeOn(Schedulers.io())
@@ -239,7 +236,7 @@ public class RetrofitService {
     /**
      * 新增post,并上传图片
      * */
-    public static Observable<String> postSnippetWith(Post post, Map<String, RequestBody> photo) {
+    public static Observable<RespondedInfo> postSnippetWith(Post post, Map<String, RequestBody> photo) {
         String s = new Gson().toJson(post);
 //        String start_in_size = String.valueOf(start_in_count);
         return mainApi
@@ -253,7 +250,7 @@ public class RetrofitService {
     /**
      * 更新post,并上传图片
      * */
-    public static Observable<ResponceInfo> updatePostSnippetWith(Post post, Map<String, RequestBody> photo) {
+    public static Observable<RespondedInfo> updatePostSnippetWith(Post post, Map<String, RequestBody> photo) {
         String s = new Gson().toJson(post);
 //        String start_in_size = String.valueOf(start_in_count);
         return mainApi
@@ -267,7 +264,7 @@ public class RetrofitService {
     /**
      * 根据管家获得提交的posts
      */
-    public static Observable<ResponceInfo> getCasesByWorker(String workerId) {
+    public static Observable<RespondedInfo> getCasesByWorker(String workerId) {
         return mainApi
                 .getCasesByWorker(workerId)
                 .subscribeOn(Schedulers.io())
@@ -293,6 +290,30 @@ public class RetrofitService {
     public static Observable<String> deletePhotoOfPost(String photoId,String photoType) {
         return mainApi
                 .deletePhotoOfPost(photoId,photoType)//传递json字符串
+//                .delay(3, TimeUnit.SECONDS)//模拟耗时
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+    /**
+     * worker登录
+     * */
+    public static Observable<RespondedInfo> workerLogin(String tele,String password) {
+        return mainApi
+                .workerLogin(tele,password)//传递json字符串
+//                .delay(3, TimeUnit.SECONDS)//模拟耗时
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+    /**
+     * worker找回密码
+     * */
+    public static Observable<RespondedInfo> newPasswordWorker(String tele,String pass) {
+        return mainApi
+                .newPasswordWorker(tele,pass)//传递json字符串
 //                .delay(3, TimeUnit.SECONDS)//模拟耗时
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

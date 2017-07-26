@@ -8,11 +8,22 @@ import java.util.List;
  * Created by DawnOct on 2017/7/7.
  */
 
-public class ResponceInfo {
+public class RespondedInfo {
     private String code;
     private List<Post> data;
+    private Post post;
+    private List<Post.WorkerBean> workers;
+    private Post.WorkerBean worker;
     private List<PhotoesInfo.Photo> photos;
     private String msg;
+    public Post.WorkerBean getWorker() {
+        return worker;
+    }
+    public void setWorker(Post.WorkerBean worker) {
+        this.worker = worker;
+    }
+
+
 
     public String getCode() {
         return code;
@@ -47,4 +58,19 @@ public class ResponceInfo {
         this.photos = photos;
     }
 
+    public List<Post.WorkerBean> getWorkers() {
+        return workers;
+    }
+
+    public void setWorkers(List<Post.WorkerBean> worker) {
+        this.workers = worker;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
 }

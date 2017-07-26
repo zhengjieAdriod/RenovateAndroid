@@ -3,27 +3,21 @@ package com.baiducloud.dawnoct.renovateproject.ZNetService;
 
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.PhotoesInfo;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
-import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.ResponceInfo;
-import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Snippet;
+import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.RespondedInfo;
 
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -36,19 +30,19 @@ public interface MainApi {
     @FormUrlEncoded
     @Headers({"Content-Type: application/json", "Accept:  application/json"})
     @POST(".")
-    Call<ResponceInfo> getNewToken(@Field("msg") String msgInfo);
+    Call<RespondedInfo> getNewToken(@Field("msg") String msgInfo);
 
     @FormUrlEncoded
     @POST(".")
-    Observable<ResponceInfo> postLogin(@Field("msg") String msgInfo);
+    Observable<RespondedInfo> postLogin(@Field("msg") String msgInfo);
 
     @FormUrlEncoded
     @POST(".")
-    Observable<ResponceInfo> getProjects(@Field("msg") String msgInfo);//1\返回项目列表;2\返回两个项目的对比信息
+    Observable<RespondedInfo> getProjects(@Field("msg") String msgInfo);//1\返回项目列表;2\返回两个项目的对比信息
 
     @FormUrlEncoded
     @POST(".")
-    Observable<ResponceInfo> postProject(@Field("msg") String msgInfo);
+    Observable<RespondedInfo> postProject(@Field("msg") String msgInfo);
 
 
     @FormUrlEncoded
@@ -70,7 +64,7 @@ public interface MainApi {
      * 获得post列表
      */
     @GET("post_by_page/")
-    Observable<ResponceInfo> getCasesTest();
+    Observable<RespondedInfo> getCasesTest();
 
 
     /**
@@ -78,19 +72,19 @@ public interface MainApi {
      */
     @Multipart
     @POST("save_post/")
-    Observable<String> postSnippetWithImag(@Part("res") RequestBody s, @PartMap Map<String, RequestBody> map);
+    Observable<RespondedInfo> postSnippetWithImag(@Part("res") RequestBody s, @PartMap Map<String, RequestBody> map);
 //    Observable<String> postSnippetWithImag(@Part("res") RequestBody s, @Part MultipartBody.Part photo);
     /**
      * 更新Post ,表单提交(管家提交的post)
      */
     @Multipart
     @POST("update_post/")
-    Observable<ResponceInfo> updatePostSnippetWithImag(@Part("res") RequestBody s, @PartMap Map<String, RequestBody> map);
+    Observable<RespondedInfo> updatePostSnippetWithImag(@Part("res") RequestBody s, @PartMap Map<String, RequestBody> map);
     /**
      * 获得post列表根据管家
      */
     @GET("post_by_worker/")
-    Observable<ResponceInfo> getCasesByWorker(@Query("workerId") String workerId);
+    Observable<RespondedInfo> getCasesByWorker(@Query("workerId") String workerId);
 
     /**
      * 获得photos列表根据post_Id
@@ -102,10 +96,16 @@ public interface MainApi {
      */
     @GET("delete_photo/")
     Observable<String> deletePhotoOfPost(@Query("photoId") String photoId,@Query("photoType") String photoType);
+    /**
+     * worker登录
+     */
+    @GET("login_worker/")
+    Observable<RespondedInfo> workerLogin(@Query("telephone") String tele,@Query("password") String password);
+    /**
+     * worker修改密码
+     */
+    @GET("new_password_worker/")
+    Observable<RespondedInfo> newPasswordWorker(@Query("telephone") String tele,@Query("password") String pass);
 }
 
-//    File file = new File(Environment.getExternalStorageDirectory(), "messenger_01.png");
-//    RequestBody photo = RequestBody.create(MediaType.parse("image/png", file);
-//    Map<String, RequestBody> photos = new HashMap<>();
-//photos.put("photos\"; filename=\"icon.png",photo);
-//        photos.put("username",RequestBody.create(null,"abc"));
+

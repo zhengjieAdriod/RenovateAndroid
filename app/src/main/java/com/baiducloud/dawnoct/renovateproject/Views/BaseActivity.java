@@ -35,4 +35,9 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     public void delete(String pk,int num) {
 
     }
+
+
+    public void netSecces(Post.WorkerBean workerBean) {
+
+    }
 }

@@ -2,16 +2,9 @@ package com.baiducloud.dawnoct.renovateproject.Presenter;
 
 import com.baiducloud.dawnoct.renovateproject.Views.MainActivity;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.RetrofitService;
-import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.MsgInfo;
-import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
-import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.ResponceInfo;
+import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.RespondedInfo;
 import com.orhanobut.logger.Logger;
 
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action0;
@@ -29,14 +22,14 @@ public class MainPresenter {
 
 
     public void getData() {
-        Observable<ResponceInfo> cases = RetrofitService.getCasesTest();
-        cases.compose(mView.<ResponceInfo>bindToLife())//解决内存泄漏的框架
+        Observable<RespondedInfo> cases = RetrofitService.getCasesTest();
+        cases.compose(mView.<RespondedInfo>bindToLife())//解决内存泄漏的框架
                 .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
 
                     }
-                }).subscribe(new Subscriber<ResponceInfo>() {
+                }).subscribe(new Subscriber<RespondedInfo>() {
             @Override
             public void onCompleted() {
                 Logger.e("" + "");
@@ -48,7 +41,7 @@ public class MainPresenter {
             }
 
             @Override
-            public void onNext(ResponceInfo posts) {
+            public void onNext(RespondedInfo posts) {
                 Logger.e("" + "");
             }
         });

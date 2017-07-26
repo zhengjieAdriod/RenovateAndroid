@@ -59,7 +59,9 @@ public class PhotoAdapter extends BaseAdapter {
             if (uri1 != null) {
                 galleryAddPic(uri1);
                 Imagepxh image = new Imagepxh(uri1, path);
-                list.add(image);
+                if(list.size()<3){
+                    list.add(image);
+                }
 //                boolean local = image.isLocal();
 //                if (!list.contains(image)) {
 //                    list.add(image);
@@ -132,14 +134,15 @@ public class PhotoAdapter extends BaseAdapter {
         if (position < list.size()) {
             Uri uri = list.get(position).getImage_uri();
             if (uri != null) {
-                String imagePathFromUri = BitmapUtils.getImagePathFromUri(context, uri);//由uri获得图片路径
+//                String imagePathFromUri = BitmapUtils.getImagePathFromUri(context, uri);//由uri获得图片路径
                 //压缩图片
-                Bitmap bitmap = BitmapUtils.decodeSampledBitmapFromFile(imagePathFromUri, 80, 80);
+//                Bitmap bitmap = BitmapUtils.decodeSampledBitmapFromFile(imagePathFromUri, 80, 80);
 //                image.setImageBitmap(bitmap);
                 Picasso.with(image.getContext())
                         .load(uri)
-                        .placeholder(R.mipmap.qiaoqiao)
-                        .error(R.mipmap.qiaoqiao)
+                        .resize(80, 80)
+                        .placeholder(R.mipmap.ic_launcher_round)
+                        .error(R.mipmap.detele)
                         .into(image);
                 image.setTag(position);//实现再次点击时查看大图
             } else if (!TextUtils.isEmpty(list.get(position).getPath())) {
@@ -147,8 +150,9 @@ public class PhotoAdapter extends BaseAdapter {
                 String path = RetrofitService.RENOVATE_HOST_PHPTO + photo.getPath();
                 Picasso.with(image.getContext())
                         .load(path)
-                        .placeholder(R.mipmap.qiaoqiao)
-                        .error(R.mipmap.qiaoqiao)
+                        .resize(80, 80)//todo 避免内存溢出(改变的是图片的像素质量)
+                        .placeholder(R.mipmap.ic_launcher_round)
+                        .error(R.mipmap.detele)
                         .into(image);
                 image.setTag(position);//实现再次点击时查看大图
             }
@@ -180,6 +184,7 @@ public class PhotoAdapter extends BaseAdapter {
                     if (v.getTag().equals(position)) {
                         Uri uri = list.get(position).getImage_uri();
                         if (uri != null) {
+                            //todo 使用photoview来实现查看大图,http://www.cnblogs.com/shen-hua/p/6634440.html
 //                                Log.e("zj", position + "看大图" + uri.toString());
 //                                Intent intent = new Intent(AddNewCaseActivity.this, AddPaintActivity.class);
 //                                intent.putExtra("from", "add_picture");
@@ -207,10 +212,14 @@ public class PhotoAdapter extends BaseAdapter {
                         requestCode = 105;
                         break;
                 }
-                Album.startAlbum(activity, requestCode
-                        , 9                                                         // 指定选择数量。
-                        , ContextCompat.getColor(context, R.color.colorPrimary)        // 指定Toolbar的颜色。
-                        , ContextCompat.getColor(context, R.color.colorPrimaryDark));  // 指定状态栏的颜色。
+                //限制三张图片最多
+                if(list.size()<3){
+                    Album.startAlbum(activity, requestCode
+                            , 9                                                         // 指定选择数量。
+                            , ContextCompat.getColor(context, R.color.colorPrimary)        // 指定Toolbar的颜色。
+                            , ContextCompat.getColor(context, R.color.colorPrimaryDark));  // 指定状态栏的颜色。
+                }
+
 
             }
         });

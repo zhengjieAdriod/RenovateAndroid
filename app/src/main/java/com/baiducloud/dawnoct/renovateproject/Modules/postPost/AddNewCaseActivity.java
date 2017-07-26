@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.baiducloud.dawnoct.renovateproject.EventPost.MessageEvent;
 import com.baiducloud.dawnoct.renovateproject.Modules.postPost.bean.Imagepxh;
 import com.baiducloud.dawnoct.renovateproject.R;
 import com.baiducloud.dawnoct.renovateproject.Views.BaseActivity;
@@ -19,6 +20,8 @@ import com.baiducloud.dawnoct.renovateproject.Wedgits.MyGridView;
 import com.baiducloud.dawnoct.renovateproject.ZAdapter.PhotoAdapter;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
 import com.yanzhenjie.album.Album;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -219,7 +222,8 @@ public class AddNewCaseActivity extends BaseActivity {
         processPresenter = new AddCasePresenter(this);
     }
 
-    public void addPostFinish() {
+    public void addPostFinish(Post post1) {
+        EventBus.getDefault().post(post1);
         finish();
     }
 
@@ -286,6 +290,14 @@ public class AddNewCaseActivity extends BaseActivity {
                 // 根据需要提示用户取消了选择。
             }
         }
+    }
+    //todo 使用弹窗,实现服务项目的选择
+    public void chooseService(View view) {
+
+    }
+    //todo 使用弹窗日历控件,实现开工日期的选择
+    public void chooseDate(View view) {
+
     }
 
 

@@ -506,7 +506,14 @@
                     android:padding="10dp"
                     android:text="提交"
                     android:visibility="gone" />
+
             </RelativeLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/add_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                app:srcCompat="@mipmap/add" />
         </android.support.design.widget.CoordinatorLayout>
 
     </LinearLayout>

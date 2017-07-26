@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.baiducloud.dawnoct.renovateproject.ZNetService.RetrofitService;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
-import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.ResponceInfo;
+import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.RespondedInfo;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class ListPostPresenter {
 
 
     public void getData(String workerId) {
-        Observable<ResponceInfo> postObservable = RetrofitService.getCasesByWorker(workerId);
-        postObservable.subscribe(new Subscriber<ResponceInfo>() {
+        Observable<RespondedInfo> postObservable = RetrofitService.getCasesByWorker(workerId);
+        postObservable.subscribe(new Subscriber<RespondedInfo>() {
             @Override
             public void onCompleted() {
                 Log.e("zj", "");
@@ -37,7 +37,7 @@ public class ListPostPresenter {
             }
 
             @Override
-            public void onNext(ResponceInfo post) {
+            public void onNext(RespondedInfo post) {
                 if ("200".endsWith(post.getCode())) {
                     List<Post> posts = post.getData();
                     mView.setNetData(posts);

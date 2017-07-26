@@ -3,6 +3,7 @@ package com.baiducloud.dawnoct.renovateproject.ZAdapter;
 import android.widget.ImageView;
 
 import com.baiducloud.dawnoct.renovateproject.R;
+import com.baiducloud.dawnoct.renovateproject.ZNetService.RetrofitService;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -24,13 +25,16 @@ public class PostListAdapter extends BaseQuickAdapter<Post, BaseViewHolder> {
 //        helper.addOnClickListener(R.id.duibi);
         ImageView imageView = (ImageView) helper.getView(R.id.img);
         Picasso.with(imageView.getContext())
-                .load("ff")
-                .placeholder(R.mipmap.qiaoqiao)
-                .error(R.mipmap.qiaoqiao)
+                .load(RetrofitService.RENOVATE_HOST_PHPTO+item.getPost_imag())
+//                .resize(100,100)
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.detele)
                 .into(imageView);
         helper.setText(R.id.name, item.getDistrict() + item.getVillage());
-        helper.setText(R.id.product, "刷新服务");
+        if(item.getService()!=null){
+            helper.setText(R.id.product, item.getService().getName());
+        }
         helper.setText(R.id.predict, "工期:" + item.getPredict() + "天");
-        helper.setText(R.id.area, "10m2");
+        helper.setText(R.id.area, item.getArea()+"平");
     }
 }

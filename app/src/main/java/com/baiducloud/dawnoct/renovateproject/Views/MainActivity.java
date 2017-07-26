@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.baiducloud.dawnoct.renovateproject.Modules.LoginWorker.LoginWorkerActivity;
 import com.baiducloud.dawnoct.renovateproject.Modules.casesList.CasesActivity;
 import com.baiducloud.dawnoct.renovateproject.Modules.postList.ListPostActivity;
 import com.baiducloud.dawnoct.renovateproject.Presenter.MainPresenter;
@@ -57,9 +58,9 @@ public class MainActivity extends BaseActivity
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                //todo 跳转到管家版
+                //todo 跳转到管家版登录页
 //                Intent intent = new Intent(MainActivity.this, AddNewCaseActivity.class);
-                Intent intent = new Intent(MainActivity.this, ListPostActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginWorkerActivity.class);
                 startActivity(intent);
             }
         });
