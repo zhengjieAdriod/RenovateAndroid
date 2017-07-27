@@ -191,18 +191,12 @@ public class RetrofitService {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Observable<List<Post>> getCases() {
-        return mainApi
-                .getCases()
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
 
-    public static Observable<RespondedInfo> getCasesTest() {
+
+    public static Observable<RespondedInfo> getCasesTest(int page) {
+        String pageStr = String.valueOf(page);
         return mainApi
-                .getCasesTest()
+                .getCasesTest(pageStr)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())

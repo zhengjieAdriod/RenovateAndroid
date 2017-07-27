@@ -26,7 +26,7 @@ public class PostListAdapter extends BaseQuickAdapter<Post, BaseViewHolder> {
         ImageView imageView = (ImageView) helper.getView(R.id.img);
         Picasso.with(imageView.getContext())
                 .load(RetrofitService.RENOVATE_HOST_PHPTO+item.getPost_imag())
-//                .resize(100,100)
+                .resize(500,500)
                 .placeholder(R.mipmap.ic_launcher_round)
                 .error(R.mipmap.detele)
                 .into(imageView);

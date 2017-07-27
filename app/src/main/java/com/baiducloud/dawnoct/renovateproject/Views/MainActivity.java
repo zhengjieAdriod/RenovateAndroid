@@ -17,8 +17,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.baiducloud.dawnoct.renovateproject.Modules.LoginWorker.LoginWorkerActivity;
-import com.baiducloud.dawnoct.renovateproject.Modules.casesList.CasesActivity;
-import com.baiducloud.dawnoct.renovateproject.Modules.postList.ListPostActivity;
+import com.baiducloud.dawnoct.renovateproject.Modules.casesList.CasesListActivity;
 import com.baiducloud.dawnoct.renovateproject.Presenter.MainPresenter;
 import com.baiducloud.dawnoct.renovateproject.R;
 import com.baiducloud.dawnoct.renovateproject.ZAdapter.MainPagerAdapter;
@@ -105,7 +104,7 @@ public class MainActivity extends BaseActivity
             @Override
             public void onClick(View v) {
                 //跳转案例列表
-                Intent intent = new Intent(MainActivity.this, CasesActivity.class);
+                Intent intent = new Intent(MainActivity.this, CasesListActivity.class);
                 startActivity(intent);
             }
         });

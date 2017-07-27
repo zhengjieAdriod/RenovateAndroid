@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -55,6 +56,8 @@ public class AddNewCaseActivity extends BaseActivity {
 
     @BindView(R.id.service_ed)
     EditText service_ed;
+    @BindView(R.id.area_ed)
+    EditText area_ed;
     @BindView(R.id.predict_ed)
     EditText predict_ed;
     @BindView(R.id.fact_ed)
@@ -99,6 +102,9 @@ public class AddNewCaseActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        // 取消进入该界面弹出输入法
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.worker_process_layout);
         //绑定activity
@@ -172,6 +178,8 @@ public class AddNewCaseActivity extends BaseActivity {
         String village = text01.toString().trim();
         Editable text02 = service_ed.getText();
         String service = text02.toString().trim();
+        Editable text07 = area_ed.getText();
+        String area = text07.toString().trim();
         Editable text03 = predict_ed.getText();
         String predict = text03.toString().trim();
         Editable text04 = fact_ed.getText();
@@ -188,7 +196,8 @@ public class AddNewCaseActivity extends BaseActivity {
         mPost.setService(new Post.ServiceBean("项目02", 20, "test"));//todo 便于测试 写死了
         mPost.setWorker(worker);
         mPost.setState(state);
-        if (TextUtils.isEmpty(village) || TextUtils.isEmpty(district) || TextUtils.isEmpty(service)
+        mPost.setArea(area);
+        if (TextUtils.isEmpty(village) || TextUtils.isEmpty(district) || TextUtils.isEmpty(service)|| TextUtils.isEmpty(area)
                 || TextUtils.isEmpty(predict) || TextUtils.isEmpty(state) || TextUtils.isEmpty(create)) {
             return true;
         }

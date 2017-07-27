@@ -54,17 +54,17 @@ public interface MainApi {
     @Headers("content-type': 'application/json")
     Observable<String> postSnippet(@Field("data") String s);
 
-    /**
-     * 获得post列表
-     */
-    @GET("post_by_page/")
-    Observable<List<Post>> getCases();
+//    /**
+//     * 获得post列表
+//     */
+//    @GET("post_by_page/")
+//    Observable<List<Post>> getCases();
 
     /**
-     * 获得post列表
+     * 获得post列表(条件分页)
      */
     @GET("post_by_page/")
-    Observable<RespondedInfo> getCasesTest();
+    Observable<RespondedInfo> getCasesTest(@Query("page") String page);
 
 
     /**

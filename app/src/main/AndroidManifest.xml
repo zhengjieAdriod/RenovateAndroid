@@ -33,7 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Modules.casesList.CasesActivity" />
+        <activity android:name=".Modules.casesList.CasesListActivity" />
         <activity android:name=".Modules.detailCase.DetailActivity" />
         <activity android:name=".Modules.postPost.AddNewCaseActivity" />
         <activity android:name=".Modules.postList.ListPostActivity" />

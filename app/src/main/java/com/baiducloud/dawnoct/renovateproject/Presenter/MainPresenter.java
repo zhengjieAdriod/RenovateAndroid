@@ -22,28 +22,6 @@ public class MainPresenter {
 
 
     public void getData() {
-        Observable<RespondedInfo> cases = RetrofitService.getCasesTest();
-        cases.compose(mView.<RespondedInfo>bindToLife())//解决内存泄漏的框架
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
 
-                    }
-                }).subscribe(new Subscriber<RespondedInfo>() {
-            @Override
-            public void onCompleted() {
-                Logger.e("" + "");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Logger.e("" + "wunlun1808");
-            }
-
-            @Override
-            public void onNext(RespondedInfo posts) {
-                Logger.e("" + "");
-            }
-        });
     }
 }

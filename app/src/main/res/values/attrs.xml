@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- RippleView -->
+    <declare-styleable name="RippleView">
+        <attr name="rv_alpha" format="integer" />
+        <attr name="rv_framerate" format="integer" />
+        <attr name="rv_rippleDuration" format="integer" />
+        <attr name="rv_zoomDuration" format="integer" />
+        <attr name="rv_color" format="color" />
+        <attr name="rv_centered" format="boolean" />
+        <attr name="rv_type" format="enum">
+            <enum name="simpleRipple" value="0" />
+            <enum name="doubleRipple" value="1" />
+            <enum name="rectangle" value="2" />
+        </attr>
+        <attr name="rv_ripplePadding" format="dimension" />
+        <attr name="rv_zoom" format="boolean" />
+        <attr name="rv_zoomScale" format="float" />
+        <attr name="rv_listMode" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="EmptyLayout">
+        <attr name="background_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="SliderLayout">
+        <attr name="slider_pic" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="MyWheelView">
+        <attr name="unitHeight" format="dimension"/>
+        <attr name="itemNumber" format="integer"/>
+        <attr name="normalTextColor" format="color"/>
+        <attr name="normalTextSize" format="dimension"/>
+        <attr name="selectedTextColor" format="color"/>
+        <attr name="selectedTextSize" format="dimension"/>
+        <attr name="selectedDefaultIndex" format="integer"/>
+        <attr name="lineColor" format="color"/>
+        <attr name="lineHeight" format="dimension"/>
+        <attr name="backgroud" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="DropDownMenu">
+        <attr name="underlineColor" format="color" />  <!--下划线颜色-->
+        <attr name="dividerColor" format="color" /> <!--分割线颜色(菜单栏)-->
+        <attr name="textSelectedColor" format="color" /> <!--tab选中颜色-->
+        <attr name="textUnselectedColor" format="color" /> <!--tab未选中颜色-->
+        <attr name="menuBackgroundColor" format="color" /> <!--tab 背景颜色-->
+        <attr name="maskColor" format="color" /><!--遮罩颜色，一般是半透明-->
+        <attr name="menuTextSize" format="dimension" /> <!--字体大小-->
+        <attr name="menuSelectedIcon" format="reference" />    <!--tab选中状态图标-->
+        <attr name="menuUnselectedIcon" format="reference" /> <!--tab未选中状态图标-->
+    </declare-styleable>
+</resources>

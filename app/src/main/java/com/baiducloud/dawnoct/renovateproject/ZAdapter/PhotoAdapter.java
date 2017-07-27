@@ -140,7 +140,7 @@ public class PhotoAdapter extends BaseAdapter {
 //                image.setImageBitmap(bitmap);
                 Picasso.with(image.getContext())
                         .load(uri)
-                        .resize(80, 80)
+                        .resize(500, 500)
                         .placeholder(R.mipmap.ic_launcher_round)
                         .error(R.mipmap.detele)
                         .into(image);
@@ -150,7 +150,7 @@ public class PhotoAdapter extends BaseAdapter {
                 String path = RetrofitService.RENOVATE_HOST_PHPTO + photo.getPath();
                 Picasso.with(image.getContext())
                         .load(path)
-                        .resize(80, 80)//todo 避免内存溢出(改变的是图片的像素质量)
+                        .resize(500, 500)//todo 避免内存溢出(改变的是图片的像素质量)
                         .placeholder(R.mipmap.ic_launcher_round)
                         .error(R.mipmap.detele)
                         .into(image);

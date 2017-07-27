@@ -1,5 +1,6 @@
 package com.baiducloud.dawnoct.renovateproject.Modules.casesList;
 
+import com.baiducloud.dawnoct.renovateproject.Wedgits.EmptyLayout;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.RetrofitService;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.RespondedInfo;
@@ -16,20 +17,21 @@ import rx.functions.Action0;
  */
 
 public class CasesPresenter {
-    CasesActivity mView;
-
-    public CasesPresenter(CasesActivity mView) {
+    CasesListActivity mView;
+    public CasesPresenter(CasesListActivity mView) {
         this.mView = mView;
     }
 
 
-    public void getData() {
-        Observable<RespondedInfo> cases = RetrofitService.getCasesTest();
+    public void getData(final int page) {
+        Observable<RespondedInfo> cases = RetrofitService.getCasesTest(page);
         cases.compose(mView.<RespondedInfo>bindToLife())//解决内存泄漏的框架
                 .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
-
+                        if(page==1){
+                            mView.showLoading();
+                        }
                     }
                 }).subscribe(new Subscriber<RespondedInfo>() {
             @Override
@@ -40,14 +42,34 @@ public class CasesPresenter {
             @Override
             public void onError(Throwable e) {
                 Logger.e("" + "wunlun1808");
+                mView.hideLoading();
+                mView.finishRefresh();
+                if(page==1){
+                    mView.showNetError(new EmptyLayout.OnRetryListener() {
+                        @Override
+                        public void onRetry() {
+                            //点击后重新加载(回调刷新)
+                            mView.getReFreshData();
+                        }
+                    });
+                }else {//加载更多时出错
+                    mView.errorLoadMore();
+                }
+
             }
 
             @Override
             public void onNext(RespondedInfo res) {
-                Logger.e("" + "");
+                mView.hideLoading();
+                mView.finishRefresh();
                 List<Post> posts = res.getData();
-                mView.loadDataFirst(posts);
+                mView.loadDataSuccess(posts);
             }
         });
+    }
+
+    public void getMoreData() {
+
+
     }
 }

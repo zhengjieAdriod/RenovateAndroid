@@ -1,6 +1,9 @@
 package com.baiducloud.dawnoct.renovateproject.Modules.detailCase;
 
+import android.util.Log;
+
 import com.baiducloud.dawnoct.renovateproject.ZNetService.RetrofitService;
+import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.PhotoesInfo;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
 import com.orhanobut.logger.Logger;
 
@@ -22,29 +25,26 @@ public class DetailPresenter {
     }
 
 
-    public void getData() {
-        Observable<List<Post>> cases = RetrofitService.getCases();
-        cases.compose(mView.<List<Post>>bindToLife())//解决内存泄漏的框架
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-
-                    }
-                }).subscribe(new Subscriber<List<Post>>() {
+    public void getPhotosInPost(Post post) {
+        Observable<PhotoesInfo> postObservable = RetrofitService.getPhotosByPostId(post.getPk());
+        postObservable.subscribe(new Subscriber<PhotoesInfo>() {
             @Override
             public void onCompleted() {
-                Logger.e("" + "");
+                Log.e("zj", "");
             }
 
             @Override
             public void onError(Throwable e) {
-                Logger.e("" + "wunlun1808");
+                Log.e("zj", "");
             }
 
             @Override
-            public void onNext(List<Post> posts) {
-                Logger.e("" + "");
-                mView.loadDataFirst(posts);
+            public void onNext(PhotoesInfo info) {
+                if ("200".endsWith(info.getCode())) {
+                    mView.showDetailPhotos(info);
+                }
+                Log.e("zj", "");
+
             }
         });
     }

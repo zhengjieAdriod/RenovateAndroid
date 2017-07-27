@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -53,7 +54,8 @@ public class UpadateCaseActivity extends BaseActivity {
     EditText create_ed;
     @BindView(R.id.state_ed)
     EditText state_ed;
-
+    @BindView(R.id.area_ed)
+    EditText area_ed;
 
     @BindView(R.id.gridview_01)
     MyGridView gridview_01;
@@ -87,6 +89,9 @@ public class UpadateCaseActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        // 取消进入该界面弹出输入法
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.worker_process_layout);
         //绑定activity
@@ -107,6 +112,7 @@ public class UpadateCaseActivity extends BaseActivity {
         fact_ed.setText(mPost.getFact());
         create_ed.setText(mPost.getCreated_time());
         state_ed.setText(mPost.getState());
+        area_ed.setText(mPost.getArea());
 
         //对图片组的初始化(包括头图)
         Imagepxhlist01 = new ArrayList<Imagepxh>();//图片的uri
@@ -197,6 +203,8 @@ public class UpadateCaseActivity extends BaseActivity {
         String create = text05.toString().trim();
         Editable text06 = state_ed.getText();
         String state = text06.toString().trim();
+        Editable text07 = area_ed.getText();
+        String area = text07.toString().trim();
         mPost.setCreated_time(create);
         mPost.setDistrict(district);
         mPost.setVillage(village);
@@ -204,7 +212,8 @@ public class UpadateCaseActivity extends BaseActivity {
         mPost.setPredict(predict);
         mPost.setService(new Post.ServiceBean(service, 20, "test"));
         mPost.setState(state);
-        if (TextUtils.isEmpty(village) || TextUtils.isEmpty(district) || TextUtils.isEmpty(service)
+        mPost.setArea(area);
+        if (TextUtils.isEmpty(village) || TextUtils.isEmpty(district) || TextUtils.isEmpty(service)||TextUtils.isEmpty(area)
                 || TextUtils.isEmpty(predict) || TextUtils.isEmpty(state) || TextUtils.isEmpty(create)) {
             return true;
         }
