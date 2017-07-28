@@ -192,11 +192,10 @@ public class RetrofitService {
     }
 
 
-
-    public static Observable<RespondedInfo> getCasesTest(int page) {
+    public static Observable<RespondedInfo> getCasesTest(int page, String district, String state) {
         String pageStr = String.valueOf(page);
         return mainApi
-                .getCasesTest(pageStr)
+                .getCasesTest(pageStr, district, state)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
@@ -229,7 +228,7 @@ public class RetrofitService {
 
     /**
      * 新增post,并上传图片
-     * */
+     */
     public static Observable<RespondedInfo> postSnippetWith(Post post, Map<String, RequestBody> photo) {
         String s = new Gson().toJson(post);
 //        String start_in_size = String.valueOf(start_in_count);
@@ -241,9 +240,10 @@ public class RetrofitService {
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
     /**
      * 更新post,并上传图片
-     * */
+     */
     public static Observable<RespondedInfo> updatePostSnippetWith(Post post, Map<String, RequestBody> photo) {
         String s = new Gson().toJson(post);
 //        String start_in_size = String.valueOf(start_in_count);
@@ -255,6 +255,7 @@ public class RetrofitService {
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
     /**
      * 根据管家获得提交的posts
      */
@@ -278,36 +279,39 @@ public class RetrofitService {
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
     /**
      * 更新post,并上传图片
-     * */
-    public static Observable<String> deletePhotoOfPost(String photoId,String photoType) {
+     */
+    public static Observable<String> deletePhotoOfPost(String photoId, String photoType) {
         return mainApi
-                .deletePhotoOfPost(photoId,photoType)//传递json字符串
+                .deletePhotoOfPost(photoId, photoType)//传递json字符串
 //                .delay(3, TimeUnit.SECONDS)//模拟耗时
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
     /**
      * worker登录
-     * */
-    public static Observable<RespondedInfo> workerLogin(String tele,String password) {
+     */
+    public static Observable<RespondedInfo> workerLogin(String tele, String password) {
         return mainApi
-                .workerLogin(tele,password)//传递json字符串
+                .workerLogin(tele, password)//传递json字符串
 //                .delay(3, TimeUnit.SECONDS)//模拟耗时
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
     /**
      * worker找回密码
-     * */
-    public static Observable<RespondedInfo> newPasswordWorker(String tele,String pass) {
+     */
+    public static Observable<RespondedInfo> newPasswordWorker(String tele, String pass) {
         return mainApi
-                .newPasswordWorker(tele,pass)//传递json字符串
+                .newPasswordWorker(tele, pass)//传递json字符串
 //                .delay(3, TimeUnit.SECONDS)//模拟耗时
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

@@ -64,7 +64,7 @@ public interface MainApi {
      * 获得post列表(条件分页)
      */
     @GET("post_by_page/")
-    Observable<RespondedInfo> getCasesTest(@Query("page") String page);
+    Observable<RespondedInfo> getCasesTest(@Query("page") String page, @Query("district") String district, @Query("state") String state);
 
 
     /**
@@ -74,12 +74,14 @@ public interface MainApi {
     @POST("save_post/")
     Observable<RespondedInfo> postSnippetWithImag(@Part("res") RequestBody s, @PartMap Map<String, RequestBody> map);
 //    Observable<String> postSnippetWithImag(@Part("res") RequestBody s, @Part MultipartBody.Part photo);
+
     /**
      * 更新Post ,表单提交(管家提交的post)
      */
     @Multipart
     @POST("update_post/")
     Observable<RespondedInfo> updatePostSnippetWithImag(@Part("res") RequestBody s, @PartMap Map<String, RequestBody> map);
+
     /**
      * 获得post列表根据管家
      */
@@ -91,21 +93,24 @@ public interface MainApi {
      */
     @GET("photos_in_post/")
     Observable<PhotoesInfo> getPhotosByPostId(@Query("postId") String workerId);
+
     /**
      * 删除post下的图片
      */
     @GET("delete_photo/")
-    Observable<String> deletePhotoOfPost(@Query("photoId") String photoId,@Query("photoType") String photoType);
+    Observable<String> deletePhotoOfPost(@Query("photoId") String photoId, @Query("photoType") String photoType);
+
     /**
      * worker登录
      */
     @GET("login_worker/")
-    Observable<RespondedInfo> workerLogin(@Query("telephone") String tele,@Query("password") String password);
+    Observable<RespondedInfo> workerLogin(@Query("telephone") String tele, @Query("password") String password);
+
     /**
      * worker修改密码
      */
     @GET("new_password_worker/")
-    Observable<RespondedInfo> newPasswordWorker(@Query("telephone") String tele,@Query("password") String pass);
+    Observable<RespondedInfo> newPasswordWorker(@Query("telephone") String tele, @Query("password") String pass);
 }
 
 

@@ -52,7 +52,10 @@ public class CasesListActivity extends BaseActivity {
     private CasesPresenter casesPresenter;
     public static int PAGE_SIZE = 5;
     public boolean hasTotal = false;
-    int mPage=1;
+    int mPage = 1;
+    String district="";
+    String state="";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +68,7 @@ public class CasesListActivity extends BaseActivity {
 
     private void initData() {
         casesPresenter = new CasesPresenter(this);
-        casesPresenter.getData(mPage);
+        casesPresenter.getData(mPage, "", "");//初始化数据
     }
 
     private void initView() {
@@ -98,9 +101,13 @@ public class CasesListActivity extends BaseActivity {
                 scaleAdapter.setCheckItem(position);
                 mDropDownMenu.setTabText(position == 0 ? headers[0] : scales[position]);
                 mDropDownMenu.closeMenu();
-                String scale = scales[position];
-//                mScale = position;
-//                presenter.getNetData(loginBean, 1, mScale, mType, mLv, mBridgeType, false);//默认是false
+                if (position > 0) {
+                    state = scales[position];
+                } else {
+                    state = "";
+                }
+                mPage = 1;
+                casesPresenter.getData(mPage, district, state);
             }
         });
 
@@ -110,13 +117,13 @@ public class CasesListActivity extends BaseActivity {
                 typeAdapter.setCheckItem(position);
                 mDropDownMenu.setTabText(position == 0 ? headers[1] : types[position]);
                 mDropDownMenu.closeMenu();
-                String type = types[position];
-//                if (position > 0) {
-//                    mType = types[position];
-//                } else {
-//                    mType = "";
-//                }
-//                presenter.getNetData(loginBean, 1, mScale, mType, mLv, mBridgeType, false);//默认是false
+                if (position > 0) {
+                    district = types[position];
+                } else {
+                    district = "";
+                }
+                mPage = 1;
+                casesPresenter.getData(mPage, district, state);
             }
         });
          /*todo 自定义的内容列表*/
@@ -164,31 +171,33 @@ public class CasesListActivity extends BaseActivity {
                         downMenuAdapter.loadMoreEnd(false);//true is gone,false is visible
                         mSwipeRefresh.setEnabled(true);//设置下拉刷新的生效
                     } else {//此刻还没有加载完的情况（需要去请求接口，加载更多）
-                        casesPresenter.getData(mPage);//todo 获得更多数据的接口.
+                        casesPresenter.getData(mPage, district, state);//todo 获得更多数据的接口.
                     }
                 }
             }
-        },mRecyclerView);
+        }, mRecyclerView);
         mRecyclerView.setAdapter(downMenuAdapter);
 
         //todo 组装mDropDownMenu
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, view);
 
     }
+
     // TODO  监听到了下拉动作(调刷新的接口)
     public void getReFreshData() {
         mPage = 1;
-        casesPresenter.getData(1);//todo 获得更多数据的接口.
+        casesPresenter.getData(1, district, state);//todo 获得更多数据的接口.
     }
+
     public void loadDataSuccess(List<Post> list) {
-        if(list.size()==0){
+        if (list.size() == 0) {
             hasTotal = true;
             downMenuAdapter.loadMoreComplete();//todo 加载完成，收起底部加载更多字样
             return;
         }
         hasTotal = false;
-        mPage = mPage+1;
-        if(mPage==2){//刷新成功后情况
+        mPage = mPage + 1;
+        if (mPage == 2) {//刷新成功后情况
             downMenuAdapter.setNewData(list);
             return;
         }

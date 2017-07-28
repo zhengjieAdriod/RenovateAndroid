@@ -1,14 +1,18 @@
 package com.baiducloud.dawnoct.renovateproject.Modules.postList;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.baiducloud.dawnoct.renovateproject.Modules.postPost.AddNewCaseActivity;
 import com.baiducloud.dawnoct.renovateproject.Modules.postPost.UpadateCaseActivity;
@@ -16,7 +20,15 @@ import com.baiducloud.dawnoct.renovateproject.R;
 import com.baiducloud.dawnoct.renovateproject.Views.BaseActivity;
 import com.baiducloud.dawnoct.renovateproject.ZAdapter.PostListAdapter;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
+import com.baiducloud.dawnoct.renovateproject.Zutils.ToastUtils;
+import com.baiducloud.dawnoct.renovateproject.Zutils.ViewUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
+import com.chad.library.adapter.base.listener.OnItemDragListener;
+import com.chad.library.adapter.base.listener.OnItemSwipeListener;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
+import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -74,6 +86,36 @@ public class ListPostActivity extends BaseActivity {
         mPresenter = new ListPostPresenter(this);
         list = new ArrayList<>();
         mDownMenuAdapter = new PostListAdapter(list);
+        ItemDragAndSwipeCallback itemDragAndSwipeCallback = new ItemDragAndSwipeCallback(mDownMenuAdapter);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemDragAndSwipeCallback);
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
+
+
+        OnItemSwipeListener onItemSwipeListener = new OnItemSwipeListener() {
+            @Override
+            public void onItemSwipeStart(RecyclerView.ViewHolder viewHolder, int pos) {
+            }
+            //成功删除的回调
+            @Override
+            public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
+                ToastUtils.showToast("tanchual ");
+            }
+            @Override
+            public void clearView(RecyclerView.ViewHolder viewHolder, int pos) {
+                ToastUtils.showToast("tancffffffffffffffffffffffffffhual ");
+
+            }
+            @Override
+            public void onItemSwipeMoving(Canvas canvas, RecyclerView.ViewHolder viewHolder, float dX, float dY, boolean isCurrentlyActive) {
+                Logger.e("rr" + "onItemSwipeMoving"+dX);
+
+            }
+        };
+        // 开启滑动删除
+        mDownMenuAdapter.enableSwipeItem();
+        mDownMenuAdapter.setOnItemSwipeListener(onItemSwipeListener);
+
+
         mDownMenuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -95,7 +137,36 @@ public class ListPostActivity extends BaseActivity {
         String pk = workerBean.getPk();//获得管家的pk
         mPresenter.getData(pk);
     }
-
+    DialogPlus dialogText;
+    //删除文字的弹出框
+    public void confirmDialogText(final int pos) {
+        if (dialogText == null) {
+            dialogText = DialogPlus.newDialog(this)
+                    .setContentHolder(new ViewHolder(R.layout.dialog_delete_pain))
+                    .setContentWidth(ViewUtils.getScreenWidth(this) / 3)  // or any custom width ie: 300
+                    .setContentHeight(ViewGroup.LayoutParams.WRAP_CONTENT)
+                    .setGravity(Gravity.CENTER)
+                    .setExpanded(false, 0)  // This will enable the expand feature, (similar to android L share dialog)
+                    .setOnClickListener(new com.orhanobut.dialogplus.OnClickListener() {
+                        @Override
+                        public void onClick(DialogPlus dialogPlus, View view) {
+                            switch (view.getId()) {
+                                case R.id.tv_cancel:
+//                                    mDownMenuAdapter.notifyDataSetChanged();
+                                    mDownMenuAdapter.notifyItemChanged(pos);
+                                    dialogPlus.dismiss();
+                                    break;
+                                case R.id.tv_confirm:
+                                    Post item = mDownMenuAdapter.getItem(pos);
+                                    dialogPlus.dismiss();
+                                    break;
+                            }
+                        }
+                    })
+                    .create();
+        }
+        dialogText.show();
+    }
     public void setNetData(List<Post> posts) {
         mDownMenuAdapter.setNewData(posts);
     }
@@ -105,7 +176,6 @@ public class ListPostActivity extends BaseActivity {
     public void onMoonEvent(Post post) {
         //修改页面数据同步
         if(mPost!=null&&mPost.getPk().equals(post.getPk())){
-//            mPost = post;
             mDownMenuAdapter.setData(mPositon,post);
             mDownMenuAdapter.notifyItemChanged(mPositon);
             return;

@@ -18,18 +18,19 @@ import rx.functions.Action0;
 
 public class CasesPresenter {
     CasesListActivity mView;
+
     public CasesPresenter(CasesListActivity mView) {
         this.mView = mView;
     }
 
 
-    public void getData(final int page) {
-        Observable<RespondedInfo> cases = RetrofitService.getCasesTest(page);
+    public void getData(final int page, String district, String state) {
+        Observable<RespondedInfo> cases = RetrofitService.getCasesTest(page, district, state);
         cases.compose(mView.<RespondedInfo>bindToLife())//解决内存泄漏的框架
                 .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
-                        if(page==1){
+                        if (page == 1) {
                             mView.showLoading();
                         }
                     }
@@ -44,7 +45,7 @@ public class CasesPresenter {
                 Logger.e("" + "wunlun1808");
                 mView.hideLoading();
                 mView.finishRefresh();
-                if(page==1){
+                if (page == 1) {
                     mView.showNetError(new EmptyLayout.OnRetryListener() {
                         @Override
                         public void onRetry() {
@@ -52,7 +53,7 @@ public class CasesPresenter {
                             mView.getReFreshData();
                         }
                     });
-                }else {//加载更多时出错
+                } else {//加载更多时出错
                     mView.errorLoadMore();
                 }
 
@@ -60,16 +61,12 @@ public class CasesPresenter {
 
             @Override
             public void onNext(RespondedInfo res) {
+                String msg = res.getMsg();
                 mView.hideLoading();
                 mView.finishRefresh();
                 List<Post> posts = res.getData();
                 mView.loadDataSuccess(posts);
             }
         });
-    }
-
-    public void getMoreData() {
-
-
     }
 }
