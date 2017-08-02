@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baiducloud.dawnoct.renovateproject.Modules.postPost.AddNewCaseActivity;
+import com.baiducloud.dawnoct.renovateproject.Modules.postPost.PhotoBigActivity;
 import com.baiducloud.dawnoct.renovateproject.Modules.postPost.bean.Imagepxh;
 import com.baiducloud.dawnoct.renovateproject.R;
 import com.baiducloud.dawnoct.renovateproject.Views.BaseActivity;
@@ -183,15 +185,13 @@ public class PhotoAdapter extends BaseAdapter {
                 if (v.getTag() != null) {
                     if (v.getTag().equals(position)) {
                         Uri uri = list.get(position).getImage_uri();
-                        if (uri != null) {
-                            //todo 使用photoview来实现查看大图,http://www.cnblogs.com/shen-hua/p/6634440.html
-//                                Log.e("zj", position + "看大图" + uri.toString());
-//                                Intent intent = new Intent(AddNewCaseActivity.this, AddPaintActivity.class);
-//                                intent.putExtra("from", "add_picture");
-//                                intent.putExtra("uri", uri.toString());
-//                                startActivityForResult(intent, 111);
-                            return;
-                        }
+                        String path = list.get(position).getPath();
+//                        Toast.makeText(context, "图片已选过", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(activity, PhotoBigActivity.class);
+                        intent.putExtra("path", TextUtils.isEmpty(path)?"":path);
+                        intent.putExtra("uri", uri!=null?uri.toString():"");
+                        activity.startActivity(intent);
+                        return;
                     }
                 }
 

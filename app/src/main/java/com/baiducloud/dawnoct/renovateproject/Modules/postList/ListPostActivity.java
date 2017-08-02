@@ -89,8 +89,6 @@ public class ListPostActivity extends BaseActivity {
         ItemDragAndSwipeCallback itemDragAndSwipeCallback = new ItemDragAndSwipeCallback(mDownMenuAdapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemDragAndSwipeCallback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
-
-
         OnItemSwipeListener onItemSwipeListener = new OnItemSwipeListener() {
             @Override
             public void onItemSwipeStart(RecyclerView.ViewHolder viewHolder, int pos) {
@@ -98,23 +96,21 @@ public class ListPostActivity extends BaseActivity {
             //成功删除的回调
             @Override
             public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
-                ToastUtils.showToast("tanchual ");
+                ToastUtils.showToast("tank");
+                ToastUtils.showToast(R.string.album_title_activity_gallery);
             }
             @Override
             public void clearView(RecyclerView.ViewHolder viewHolder, int pos) {
-                ToastUtils.showToast("tancffffffffffffffffffffffffffhual ");
-
+                ToastUtils.showToast("clearView");
             }
             @Override
             public void onItemSwipeMoving(Canvas canvas, RecyclerView.ViewHolder viewHolder, float dX, float dY, boolean isCurrentlyActive) {
                 Logger.e("rr" + "onItemSwipeMoving"+dX);
-
             }
         };
         // 开启滑动删除
         mDownMenuAdapter.enableSwipeItem();
         mDownMenuAdapter.setOnItemSwipeListener(onItemSwipeListener);
-
 
         mDownMenuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -141,12 +137,12 @@ public class ListPostActivity extends BaseActivity {
     //删除文字的弹出框
     public void confirmDialogText(final int pos) {
         if (dialogText == null) {
-            dialogText = DialogPlus.newDialog(this)
+            dialogText = DialogPlus.newDialog(this)//I cannot because of
                     .setContentHolder(new ViewHolder(R.layout.dialog_delete_pain))
-                    .setContentWidth(ViewUtils.getScreenWidth(this) / 3)  // or any custom width ie: 300
-                    .setContentHeight(ViewGroup.LayoutParams.WRAP_CONTENT)
-                    .setGravity(Gravity.CENTER)
-                    .setExpanded(false, 0)  // This will enable the expand feature, (similar to android L share dialog)
+                    .setContentWidth(ViewUtils.getScreenWidth(this) / 3)  // called by people
+                    .setContentHeight(ViewGroup.LayoutParams.WRAP_CONTENT)// wrap_content match_parent left_right bottom up button test text_view
+                    .setGravity(Gravity.CENTER)//setGravity leave go just do it by the way
+                    .setExpanded(false, 0)  //  gradle in peace world people many true false success
                     .setOnClickListener(new com.orhanobut.dialogplus.OnClickListener() {
                         @Override
                         public void onClick(DialogPlus dialogPlus, View view) {

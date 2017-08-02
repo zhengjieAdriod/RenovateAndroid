@@ -176,7 +176,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/start_in_imags"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/start_in_name"
                 android:paddingTop="15dp" />
 
@@ -310,7 +310,16 @@
                 android:drawableLeft="@mipmap/drop_down_checked"
                 android:text="业主评价:"
                 android:textSize="17sp" />
-
+<TextView
+    android:layout_toRightOf="@+id/comment_tv"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/add_comment"
+    android:layout_marginLeft="20dp"
+    android:textColor="#ea1b1b"
+    android:onClick="addComment"
+    android:text="添加评价"
+    />
             <ImageView
                 android:id="@+id/comment_img"
                 android:layout_width="wrap_content"
@@ -318,27 +327,12 @@
                 android:layout_alignParentRight="true"
                 android:src="@mipmap/drop_down_selected_icon" />
 
-            <TextView
-                android:id="@+id/owner_name"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/comment_rcy"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/comment_tv"
-                android:text="业主***" />
-
-            <TextView
-                android:id="@+id/wu_star"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/comment_tv"
-                android:layout_toRightOf="@+id/owner_name" />
-
-            <TextView
-                android:id="@+id/comment_des"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/owner_name"
-                android:text="很好很喜欢,真的不错哈" />
-
+                />
         </RelativeLayout>
     </RelativeLayout>
 </ScrollView>

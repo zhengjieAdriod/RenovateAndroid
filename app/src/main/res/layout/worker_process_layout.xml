@@ -47,11 +47,13 @@
             </android.support.design.widget.AppBarLayout>
             <!--加marginTop,为了解决ToolBar覆盖Viewpager的问题-->
             <RelativeLayout
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:id="@+id/re_tab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="?attr/actionBarSize"
-                android:background="#ea9999">
+                android:background="#fff">
 
                 <LinearLayout
                     android:id="@+id/head_ll"
@@ -76,7 +78,7 @@
                         android:layout_weight="3"
                         android:columnWidth="10dp"
                         android:horizontalSpacing="0dp"
-                        android:numColumns="2" />
+                        android:numColumns="4" />
 
                     <Button
                         android:id="@+id/head_post"
@@ -376,7 +378,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@+id/query_bt"
-                    android:background="#fff" />
+                    android:background="#de3232" />
 
                 <LinearLayout
                     android:id="@+id/start_in_ll"
@@ -402,16 +404,18 @@
                         android:layout_weight="3"
                         android:columnWidth="10dp"
                         android:horizontalSpacing="0dp"
-                        android:numColumns="2" />
+                        android:numColumns="4" />
 
-                    <Button
+                    <ImageView
+                        android:paddingTop="15dp"
                         android:id="@+id/start_in_post"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:src="@mipmap/uploading"
                         android:onClick="singlePost"
                         android:tag="start"
-                        android:text="post" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -438,16 +442,19 @@
                         android:layout_weight="3"
                         android:columnWidth="10dp"
                         android:horizontalSpacing="0dp"
-                        android:numColumns="2" />
+                        android:numColumns="4" />
 
-                    <Button
+                    <ImageView
                         android:id="@+id/protection_post"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:onClick="singlePost"
+                        android:paddingTop="15dp"
+
+                        android:src="@mipmap/uploading"
                         android:tag="protect"
-                        android:text="post" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -474,16 +481,19 @@
                         android:layout_weight="3"
                         android:columnWidth="10dp"
                         android:horizontalSpacing="0dp"
-                        android:numColumns="2" />
+                        android:numColumns="4" />
 
-                    <Button
+                    <ImageView
                         android:id="@+id/WorkSite__post"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:onClick="singlePost"
                         android:tag="work_site"
-                        android:text="post" />
+                        android:paddingTop="15dp"
+
+                        android:src="@mipmap/uploading"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -510,16 +520,19 @@
                         android:layout_weight="3"
                         android:columnWidth="10dp"
                         android:horizontalSpacing="0dp"
-                        android:numColumns="2" />
+                        android:numColumns="4" />
 
-                    <Button
+                    <ImageView
                         android:id="@+id/finish__post"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:onClick="singlePost"
+                        android:src="@mipmap/uploading"
+                        android:paddingTop="15dp"
+
                         android:tag="finish"
-                        android:text="post" />
+                       />
                 </LinearLayout>
 
                 <Button

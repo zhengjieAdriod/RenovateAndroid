@@ -1,6 +1,8 @@
 package com.baiducloud.dawnoct.renovateproject.Modules.LoginWorker;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -66,6 +68,13 @@ public class LoginWorkerActivity extends BaseActivity {
     public void netSecces(Post.WorkerBean workerBean) {
         Intent intent = new Intent(LoginWorkerActivity.this, ListPostActivity.class);
         intent.putExtra("worker",workerBean);
+        SharedPreferences mySharedPreferences = getSharedPreferences("workerData",
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString("workerTelephone", workerBean.getTele());
+        editor.putString("workerId", workerBean.getPk());
+        //提交当前数据
+        editor.apply();
         startActivity(intent);
     }
     //忘记密码

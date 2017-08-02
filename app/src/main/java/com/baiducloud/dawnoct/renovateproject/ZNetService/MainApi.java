@@ -1,6 +1,7 @@
 package com.baiducloud.dawnoct.renovateproject.ZNetService;
 
 
+import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Comment;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.PhotoesInfo;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.RespondedInfo;
@@ -111,6 +112,27 @@ public interface MainApi {
      */
     @GET("new_password_worker/")
     Observable<RespondedInfo> newPasswordWorker(@Query("telephone") String tele, @Query("password") String pass);
+
+    /**
+     * 获得评论
+     */
+    @GET("comments_by_post/")
+    Observable<RespondedInfo> getCommentsInPost(@Query("postId") String pk);
+
+    @FormUrlEncoded
+    @POST("add_comment/")
+    @Headers("content-type': 'application/json")
+    Observable<RespondedInfo> addComment(@Field("param") String s);
+
+    @FormUrlEncoded
+    @POST("add_call_back/")
+    @Headers("content-type': 'application/json")
+    Observable<RespondedInfo> addCallBack(@Field("param") String s);
+    /**
+     * 业主登录
+     */
+    @GET("owner_login/")
+    Observable<RespondedInfo> ownerLoign(@Query("telephone") String telephone,@Query("password") String password);
 }
 
 

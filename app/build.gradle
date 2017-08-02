@@ -73,6 +73,9 @@ dependencies {
     compile 'com.zhy:autolayout:1.4.5'
     //进度条(第三方加载动画 Android-SpinKit)https://github.com/ybq/Android-SpinKit
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
+    //查看大图
+    compile 'com.github.SuperKotlin:PictureViewer:1.0.1'
+
 
 
 }

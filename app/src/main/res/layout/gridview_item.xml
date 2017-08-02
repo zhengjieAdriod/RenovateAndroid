@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-   >
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="#ffa1ff87"
-        android:scaleType="fitXY" />
+        android:scaleType="center" />
 
     <TextView
         android:id="@+id/tv_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="删除"
-        android:paddingTop="15dp"
-        android:paddingRight="15dp"
-        android:textColor="#ff7db8ff"
-        android:layout_marginLeft="5dp"
-        android:textSize="15sp"
-        android:layout_toRightOf="@+id/image"
         android:layout_alignBottom="@+id/image"
-        />
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/image"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp"
+        android:text="删除"
+        android:textColor="#ff7db8ff"
+        android:textSize="15sp" />
 
 
     <!--android:layout_marginLeft="-20dp"-->

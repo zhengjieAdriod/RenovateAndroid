@@ -1,6 +1,7 @@
 package com.baiducloud.dawnoct.renovateproject.Modules.postPost;
 
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +11,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.baiducloud.dawnoct.renovateproject.Modules.postPost.bean.Imagepxh;
 import com.baiducloud.dawnoct.renovateproject.R;
@@ -68,13 +72,13 @@ public class UpadateCaseActivity extends BaseActivity {
     @BindView(R.id.gridview_head)
     MyGridView gridview_head;
     @BindView(R.id.start_in_post)
-    Button start_in_post;
+    ImageView start_in_post;
     @BindView(R.id.protection_post)
-    Button protection_post;
+    ImageView protection_post;
     @BindView(R.id.WorkSite__post)
-    Button WorkSite__post;
+    ImageView WorkSite__post;
     @BindView(R.id.finish__post)
-    Button finish__post;
+    ImageView finish__post;
     UpadateCasePresenter processPresenter;
     private List<Imagepxh> Imagepxhlist01;
     private List<Imagepxh> Imagepxhlist02;
@@ -86,7 +90,7 @@ public class UpadateCaseActivity extends BaseActivity {
     Toolbar mToolbar;
     Post.WorkerBean worker;
     Post mPost;
-
+    TranslateAnimation translateAnimation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         // 取消进入该界面弹出输入法
@@ -102,6 +106,12 @@ public class UpadateCaseActivity extends BaseActivity {
 
     private void initView() {
         initToolBar(mToolbar, true, "查看并编辑项目");
+        translateAnimation= new TranslateAnimation(0, 0, 0, 20);
+        translateAnimation.setRepeatCount(Animation.INFINITE);
+        translateAnimation.setRepeatMode(Animation.REVERSE);
+        translateAnimation.setDuration(500);
+//        start_in_post.startAnimation(translateAnimation);
+
         //初始化多个EditText
         district_ed.setText(mPost.getDistrict());
         village_ed.setText(mPost.getVillage());
@@ -168,18 +178,22 @@ public class UpadateCaseActivity extends BaseActivity {
             case "start":
                 Imagepxhlist01 = myAdapter.getList();
                 postImages(mPost, Imagepxhlist01, "start_imag");
+                start_in_post.startAnimation(translateAnimation);
                 break;
             case "protect":
                 Imagepxhlist02 = myAdapter02.getList();
                 postImages(mPost, Imagepxhlist02, "protect_imag");
+                protection_post.startAnimation(translateAnimation);
                 break;
             case "work_site":
                 Imagepxhlist03 = myAdapter03.getList();
                 postImages(mPost, Imagepxhlist03, "work_site");
+                WorkSite__post.startAnimation(translateAnimation);
                 break;
             case "finish":
                 Imagepxhlist04 = myAdapter04.getList();
                 postImages(mPost, Imagepxhlist04, "finish");
+                finish__post.startAnimation(translateAnimation);
                 break;
             case "head":
                 Imagepxhlist05 = myAdapterHead.getList();
@@ -337,18 +351,23 @@ public class UpadateCaseActivity extends BaseActivity {
 
     //讲图片组替换为网络图片,便于之后的删除操作
     public void changeNetPhotos(List<PhotoesInfo.Photo> photos) {
+
         String des = photos.get(0).getDes();
         if (des.contains("start_imag")) {
             myAdapter.setNetPhotos(photos);
+            start_in_post.clearAnimation();
         }
         if (des.contains("protect_imag")) {
             myAdapter02.setNetPhotos(photos);
+            protection_post.clearAnimation();
         }
         if (des.contains("work_site")) {
             myAdapter03.setNetPhotos(photos);
+            WorkSite__post.clearAnimation();
         }
         if (des.contains("finish")) {
             myAdapter04.setNetPhotos(photos);
+            finish__post.clearAnimation();
         }
     }
     //todo 使用弹窗,实现服务项目的选择

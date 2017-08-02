@@ -79,14 +79,14 @@ public class AddNewCaseActivity extends BaseActivity {
     MyGridView gridview_head;
 
 
-    @BindView(R.id.start_in_post)
-    Button start_in_post;
-    @BindView(R.id.protection_post)
-    Button protection_post;
-    @BindView(R.id.WorkSite__post)
-    Button WorkSite__post;
-    @BindView(R.id.finish__post)
-    Button finish__post;
+//    @BindView(R.id.start_in_post)
+//    Button start_in_post;
+//    @BindView(R.id.protection_post)
+//    Button protection_post;
+//    @BindView(R.id.WorkSite__post)
+//    Button WorkSite__post;
+//    @BindView(R.id.finish__post)
+//    Button finish__post;
     AddCasePresenter processPresenter;
     private List<Imagepxh> Imagepxhlist01;
     private List<Imagepxh> Imagepxhlist02;

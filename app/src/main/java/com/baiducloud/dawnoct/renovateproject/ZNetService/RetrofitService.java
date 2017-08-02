@@ -3,6 +3,7 @@ package com.baiducloud.dawnoct.renovateproject.ZNetService;
 import android.support.annotation.NonNull;
 
 import com.baiducloud.dawnoct.renovateproject.AndroidApplication;
+import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Comment;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.MsgInfo;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.PhotoesInfo;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
@@ -312,6 +313,57 @@ public class RetrofitService {
     public static Observable<RespondedInfo> newPasswordWorker(String tele, String pass) {
         return mainApi
                 .newPasswordWorker(tele, pass)//传递json字符串
+//                .delay(3, TimeUnit.SECONDS)//模拟耗时
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获得评论
+     */
+    public static Observable<RespondedInfo> getComments(String postId) {
+        return mainApi
+                .getCommentsInPost(postId)//传递json字符串
+//                .delay(3, TimeUnit.SECONDS)//模拟耗时
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+    /**
+     * 添加评论
+     */
+    public static Observable<RespondedInfo> addComment(Comment comment) {
+        String s = new Gson().toJson(comment);
+        return mainApi
+                .addComment(s)//传递json字符串
+//                .delay(3, TimeUnit.SECONDS)//模拟耗时
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+    /**
+     * 回复评论
+     */
+    public static Observable<RespondedInfo> addCallBack(Comment comment) {
+        String s = new Gson().toJson(comment);
+        return mainApi
+                .addCallBack(s)//传递json字符串
+//                .delay(3, TimeUnit.SECONDS)//模拟耗时
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+    /**
+     * 业主登录
+     */
+    public static Observable<RespondedInfo> ownerLogin(String telephone,String password) {
+        return mainApi
+                .ownerLoign(telephone,password)//传递json字符串
 //                .delay(3, TimeUnit.SECONDS)//模拟耗时
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
