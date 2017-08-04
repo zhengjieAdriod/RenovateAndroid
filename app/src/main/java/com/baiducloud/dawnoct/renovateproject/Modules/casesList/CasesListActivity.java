@@ -21,6 +21,8 @@ import com.baiducloud.dawnoct.renovateproject.ZAdapter.CasesListAdapter;
 import com.baiducloud.dawnoct.renovateproject.ZAdapter.GirdDropDownAdapter;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.ethanhua.skeleton.Skeleton;
+import com.ethanhua.skeleton.SkeletonScreen;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -55,7 +57,7 @@ public class CasesListActivity extends BaseActivity {
     int mPage = 1;
     String district="";
     String state="";
-
+     SkeletonScreen skeletonScreen;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +76,6 @@ public class CasesListActivity extends BaseActivity {
     private void initView() {
         mInflater = LayoutInflater.from(getApplicationContext());
         initToolBar(mToolbar, true, "案例列表");
-
         //init city menu
         final ListView scaleView = new ListView(this);
         scaleAdapter = new GirdDropDownAdapter(this, Arrays.asList(scales));
@@ -176,7 +177,18 @@ public class CasesListActivity extends BaseActivity {
                 }
             }
         }, mRecyclerView);
-        mRecyclerView.setAdapter(downMenuAdapter);
+//        mRecyclerView.setAdapter(downMenuAdapter);
+        skeletonScreen = Skeleton.bind(mRecyclerView)
+                .adapter(downMenuAdapter)
+//                .load(R.layout.item_skeleton_news)
+                .count(10)
+                .show();
+        mRecyclerView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                skeletonScreen.hide();
+            }
+        }, 5000);
 
         //todo 组装mDropDownMenu
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, view);
@@ -190,6 +202,7 @@ public class CasesListActivity extends BaseActivity {
     }
 
     public void loadDataSuccess(List<Post> list) {
+        skeletonScreen.hide();
         if (list.size() == 0) {
             hasTotal = true;
             downMenuAdapter.loadMoreComplete();//todo 加载完成，收起底部加载更多字样
@@ -198,6 +211,7 @@ public class CasesListActivity extends BaseActivity {
         hasTotal = false;
         mPage = mPage + 1;
         if (mPage == 2) {//刷新成功后情况
+//            skeletonScreen.hide();//收起预加载占位
             downMenuAdapter.setNewData(list);
             return;
         }

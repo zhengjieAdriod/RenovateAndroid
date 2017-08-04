@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/library_downMenue/library_downMenue.iml" filepath="$PROJECT_DIR$/library_downMenue/library_downMenue.iml" />
       <module fileurl="file://$PROJECT_DIR$/pictruetest/pictruetest.iml" filepath="$PROJECT_DIR$/pictruetest/pictruetest.iml" />
       <module fileurl="file://$PROJECT_DIR$/recyclerViewlibrary/recyclerViewlibrary.iml" filepath="$PROJECT_DIR$/recyclerViewlibrary/recyclerViewlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/skeleton/skeleton.iml" filepath="$PROJECT_DIR$/skeleton/skeleton.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wxtest/wxtest.iml" filepath="$PROJECT_DIR$/wxtest/wxtest.iml" />
     </modules>
   </component>
 </project>

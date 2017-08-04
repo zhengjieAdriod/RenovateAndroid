@@ -34,14 +34,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".Modules.casesList.CasesListActivity" />
-        <activity android:name=".Modules.detailCase.DetailActivity" />
+        <activity android:name=".Modules.detailCase.DetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Modules.postPost.AddNewCaseActivity" />
         <activity android:name=".Modules.postList.ListPostActivity" />
         <activity android:name=".Modules.postPost.UpadateCaseActivity" />
         <activity android:name=".Modules.LoginWorker.LoginWorkerActivity" />
         <activity android:name=".Modules.LoginWorker.NewPasswordActivity" />
         <activity android:name=".Modules.postPost.PhotoBigActivity" />
-
         <activity
             android:name="com.yanzhenjie.album.AlbumActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

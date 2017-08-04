@@ -75,6 +75,8 @@ dependencies {
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
     //查看大图
     compile 'com.github.SuperKotlin:PictureViewer:1.0.1'
+    //预加载的占位
+    compile 'com.ethanhua:skeleton:0.2.0'
 
 
 

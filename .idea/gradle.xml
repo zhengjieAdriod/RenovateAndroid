@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$/library_downMenue" />
             <option value="$PROJECT_DIR$/pictruetest" />
             <option value="$PROJECT_DIR$/recyclerViewlibrary" />
+            <option value="$PROJECT_DIR$/skeleton" />
+            <option value="$PROJECT_DIR$/wxtest" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

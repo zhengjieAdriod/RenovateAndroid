@@ -4,16 +4,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +37,8 @@ import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.PhotoesInfo;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
 import com.baiducloud.dawnoct.renovateproject.Zutils.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.ethanhua.skeleton.Skeleton;
+import com.ethanhua.skeleton.SkeletonScreen;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
 import java.util.ArrayList;
@@ -68,7 +75,10 @@ public class DetailActivity extends BaseActivity {
 
     @BindView(R.id.comment_rcy)
     RecyclerView comment_rcy;
-
+        @BindView(R.id.toolbar_title)
+        TextView title;
+    @BindView(R.id.activity_coor_tool_bar)
+    CoordinatorLayout rootView;
     DetailAdapter mAdapter01, mAdapter02, mAdapter03, mAdapter04;
     CommentAdapter commentAdapter;
     List<PhotoesInfo.Photo> list01, list02, list03, list04;
@@ -76,14 +86,21 @@ public class DetailActivity extends BaseActivity {
 
     Post post;
     DetailPresenter presenter;
-
+    private Toolbar mToolbar;
+    SkeletonScreen skeletonScreen;
+//    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cases_detail_layout);
+        setContentView(R.layout.cases_detail_layout02);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         //绑定activity
         ButterKnife.bind(this);
+        skeletonScreen = Skeleton.bind(rootView)
+                .load(R.layout.cases_detail_layout02)
+                .show();
         post = (Post) getIntent().getSerializableExtra("post");
+        title.setText(post.getVillage());
         initData();
         initView();
 
@@ -175,6 +192,7 @@ public class DetailActivity extends BaseActivity {
     }
 
     public void showDetailPhotos(PhotoesInfo info) {
+        skeletonScreen.hide();
         List<PhotoesInfo.Photo> startImages = info.getStartImages();
         List<PhotoesInfo.Photo> protectionImages = info.getProtectionImages();
         List<PhotoesInfo.Photo> workSiteImages = info.getWorkSiteImages();
