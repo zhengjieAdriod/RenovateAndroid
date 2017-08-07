@@ -332,6 +332,7 @@ public class RetrofitService {
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
     /**
      * 添加评论
      */
@@ -345,6 +346,7 @@ public class RetrofitService {
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
     /**
      * 回复评论
      */
@@ -358,13 +360,26 @@ public class RetrofitService {
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
     /**
      * 业主登录
      */
-    public static Observable<RespondedInfo> ownerLogin(String telephone,String password) {
+    public static Observable<RespondedInfo> ownerLogin(String telephone, String password) {
         return mainApi
-                .ownerLoign(telephone,password)//传递json字符串
+                .ownerLoign(telephone, password)//传递json字符串
 //                .delay(3, TimeUnit.SECONDS)//模拟耗时
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获得服务列表
+     */
+    public static Observable<RespondedInfo> getServices() {
+        return mainApi
+                .getServices()//传递json字符串
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())

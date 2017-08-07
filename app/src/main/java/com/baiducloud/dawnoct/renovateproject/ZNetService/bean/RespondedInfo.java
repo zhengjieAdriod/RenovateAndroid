@@ -16,6 +16,7 @@ public class RespondedInfo {
     private Post.WorkerBean worker;
     private List<PhotoesInfo.Photo> photos;
     private List<Comment> comments;
+    private List<Post.ServiceBean> services;
     private List<Owner> owners;
     private Comment comment;
     private String msg;
@@ -109,5 +110,13 @@ public class RespondedInfo {
 
     public void setComment_size(int comment_size) {
         this.comment_size = comment_size;
+    }
+
+    public List<Post.ServiceBean> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Post.ServiceBean> services) {
+        this.services = services;
     }
 }

@@ -21,7 +21,7 @@ import butterknife.BindView;
  * Created by DawnOct on 2017/7/7.
  */
 
-public abstract class BaseActivity extends RxAppCompatActivity implements IBaseView{
+public abstract class BaseActivity extends RxAppCompatActivity implements IBaseView {
     @Nullable
     @BindView(R.id.loading_layout)
     protected EmptyLayout mEmptyLayout;
@@ -39,6 +39,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
             tv_title.setText(title);
         }
     }
+
     /**
      * 初始化下拉刷新(监听下拉动作)
      */
@@ -60,12 +61,16 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
 
     }
 
-    public void delete(String pk,int num) {
+    public void delete(String pk, int num) {
 
     }
 
 
     public void netSecces(Post.WorkerBean workerBean) {
+
+    }
+
+    public void goActivity() {
 
     }
 

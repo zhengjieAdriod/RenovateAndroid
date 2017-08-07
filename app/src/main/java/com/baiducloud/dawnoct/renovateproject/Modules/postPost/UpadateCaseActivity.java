@@ -1,10 +1,14 @@
 package com.baiducloud.dawnoct.renovateproject.Modules.postPost;
 
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -13,22 +17,30 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.baiducloud.dawnoct.renovateproject.Modules.LoginWorker.GlobalData;
 import com.baiducloud.dawnoct.renovateproject.Modules.postPost.bean.Imagepxh;
 import com.baiducloud.dawnoct.renovateproject.R;
 import com.baiducloud.dawnoct.renovateproject.Views.BaseActivity;
 import com.baiducloud.dawnoct.renovateproject.Wedgits.MyGridView;
+import com.baiducloud.dawnoct.renovateproject.Wedgits.StateButton;
 import com.baiducloud.dawnoct.renovateproject.ZAdapter.PhotoAdapter;
+import com.baiducloud.dawnoct.renovateproject.ZAdapter.ServiceChoiceAdapter;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.PhotoesInfo;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.bean.Post;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.yanzhenjie.album.Album;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +100,8 @@ public class UpadateCaseActivity extends BaseActivity {
     PhotoAdapter myAdapter, myAdapter02, myAdapter03, myAdapter04, myAdapterHead;
     @BindView(R.id.tool_bar)
     Toolbar mToolbar;
+    @BindView(R.id.service_in_post)
+    StateButton service_in_post;
     Post.WorkerBean worker;
     Post mPost;
     TranslateAnimation translateAnimation;
@@ -370,60 +384,105 @@ public class UpadateCaseActivity extends BaseActivity {
             finish__post.clearAnimation();
         }
     }
-    //todo 使用弹窗,实现服务项目的选择
+    //使用弹窗,实现服务项目的选择
     public void chooseService(View view) {
+        showDialogLogin("");
+    }
+    /**
+     * 显示服务选择狂
+     */
+    int mPosition=-1;
+    private void showDialogLogin(final String type) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(UpadateCaseActivity.this);
+        View view = View.inflate(UpadateCaseActivity.this, R.layout.dialog_service_choice, null);
+        final RecyclerView recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        //添加分割线
+        recycler_view.addItemDecoration(new DividerItemDecoration(
+                this, DividerItemDecoration.VERTICAL));
+        List<Post.ServiceBean> list = GlobalData.getServices();
+        ServiceChoiceAdapter serviceChoiceAdapter = new ServiceChoiceAdapter(R.layout.servive_choice_item, list);
+        serviceChoiceAdapter.setPositon(mPosition);//初始化选中状态
+        recycler_view.setAdapter(serviceChoiceAdapter);
+
+        builder.setView(view);
+        builder.setCancelable(true);
+        final AlertDialog dialog = builder.show();
+        serviceChoiceAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                mPosition = position;
+                View viewByPosition = adapter.getViewByPosition(recycler_view, position, R.id.iv);
+                viewByPosition.setVisibility(View.VISIBLE);
+                Post.ServiceBean o = (Post.ServiceBean)adapter.getData().get(position);
+                String serviceName = o.getName();
+                service_ed.setText(serviceName);
+                dialog.dismiss();
+            }
+        });
+
 
     }
-    //todo 使用弹窗日历控件,实现开工日期的选择
+    //使用弹窗日历控件,实现开工日期的选择
     public void chooseDate(View view) {
+        showDialogDate("");
+    }
+    private void showDialogDate(final String type) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(UpadateCaseActivity.this);
+        View view = View.inflate(UpadateCaseActivity.this, R.layout.dialog_date_choice, null);
+        final MaterialCalendarView CalendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
+        builder.setView(view);
+        builder.setCancelable(true);
+        final AlertDialog dialog = builder.show();
+        CalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                int year = date.getYear();
+                int month = date.getMonth();
+                int day = date.getDay();
+                create_ed.setText(year+"年"+month+"月"+day+"日");
+                Log.e("",year+"年"+month+"月"+day+"日");
+            }
+        });
+    }
+    //改变状态
+    public void stateChange(View view){
 
     }
-    //    public void postInfoAll(View view) {
-//        Editable text = editText.getText();
-//        mVillage = text.toString().trim();
-//        //准备图片数据
-//        Imagepxhlist01 = myAdapter.getList();
-//        Imagepxhlist02 = myAdapter02.getList();
-//        Imagepxhlist03 = myAdapter03.getList();
-//        Imagepxhlist04 = myAdapter04.getList();
-//        Map<String, RequestBody> map = new HashMap<>();
-//        File file = null;
-//        for (int i = 0; i < Imagepxhlist01.size(); i++) {
-//            Imagepxh imagepxh = Imagepxhlist01.get(i);
-//            file = new File(imagepxh.getPath());
-//            RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
-////                    map.put("post_imag", requestBody);
-//            //todo  千万要加上filename=""
-//            map.put("start_imag" + i + "\"; filename=\"" + file.getName(), requestBody);
-////                    map.put("post_imag\"; filename=" + file.getName(), requestBody);
-////                    map.put("file" + i + "\";filename=\"" + file.getName(), requestBody);
-//        }
-//        for (int i = 0; i < Imagepxhlist02.size(); i++) {
-//            Imagepxh imagepxh = Imagepxhlist02.get(i);
-//            file = new File(imagepxh.getPath());
-//            RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
-//            map.put("protect_imag" + i + "\"; filename=\"" + file.getName(), requestBody);
-//        }
-//        for (int i = 0; i < Imagepxhlist03.size(); i++) {
-//            Imagepxh imagepxh = Imagepxhlist03.get(i);
-//            file = new File(imagepxh.getPath());
-//            RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
-//            map.put("work_site" + i + "\"; filename=\"" + file.getName(), requestBody);
-//        }
-//        for (int i = 0; i < Imagepxhlist04.size(); i++) {
-//            Imagepxh imagepxh = Imagepxhlist04.get(i);
-//            file = new File(imagepxh.getPath());
-//            RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
-//            map.put("finish" + i + "\"; filename=\"" + file.getName(), requestBody);
-//        }
-////                RequestBody photoRequestBody = RequestBody.create(MediaType.parse("image/png"), file);
-////                MultipartBody.Part photo = MultipartBody.Part.createFormData("post_imag", "111.png", photoRequestBody);
-//        //提交上传数据
-//        Post post = new Post();
-//        post.setVillage(mVillage);
-//        post.setCreated_time("");
-//        post.setDistrict("河北-邯郸");
-//        processPresenter.updatePostData(post, map);//todo 访问网路
-//    }
+    private void showDialogState(final String type) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(UpadateCaseActivity.this);
+        View view = View.inflate(UpadateCaseActivity.this, R.layout.dialog_service_choice, null);
+        final RecyclerView recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        //添加分割线
+        recycler_view.addItemDecoration(new DividerItemDecoration(
+                this, DividerItemDecoration.VERTICAL));
+        List<Post.ServiceBean> list = new ArrayList<>();
+        Post.ServiceBean b01 = new Post.ServiceBean("施工中",0,"");
+        Post.ServiceBean b02 = new Post.ServiceBean("已完成",1,"");
+        list.add(b01);
+        list.add(b02);
+        ServiceChoiceAdapter serviceChoiceAdapter = new ServiceChoiceAdapter(R.layout.servive_choice_item, list);
+//        serviceChoiceAdapter.setPositon(mPosition);//初始化选中状态
+        recycler_view.setAdapter(serviceChoiceAdapter);
+
+        builder.setView(view);
+        builder.setCancelable(true);
+        final AlertDialog dialog = builder.show();
+        serviceChoiceAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                mPosition = position;
+                View viewByPosition = adapter.getViewByPosition(recycler_view, position, R.id.iv);
+                viewByPosition.setVisibility(View.VISIBLE);
+                Post.ServiceBean o = (Post.ServiceBean)adapter.getData().get(position);
+                String serviceName = o.getName();
+                service_ed.setText(serviceName);
+                dialog.dismiss();
+            }
+        });
+
+
+    }
 }
 

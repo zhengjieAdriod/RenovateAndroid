@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -32,6 +33,7 @@ public class LoginWorkerActivity extends BaseActivity {
 
 
     LoginWorkerPresenter presenter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class LoginWorkerActivity extends BaseActivity {
         presenter = new LoginWorkerPresenter(this);
         //从修改密码页面传过来
         Post.WorkerBean worker = (Post.WorkerBean) getIntent().getSerializableExtra("worker");
-        if(worker!=null){
+        if (worker != null) {
             et_name.setText(worker.getTele());
         }
     }
@@ -58,16 +60,18 @@ public class LoginWorkerActivity extends BaseActivity {
     public void login(View view) {
         String tele = et_name.getText().toString().trim();
         String password = et_pwd.getText().toString().trim();
-        if(TextUtils.isEmpty(tele)||TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(tele) || TextUtils.isEmpty(password)) {
             ToastUtils.showToast("手机号或者密码不能为空");
             return;
         }
-        presenter.login(tele,password);
+        presenter.login(tele, password);
     }
+
     //登录成功后的回调
+    Post.WorkerBean mW;
+
     public void netSecces(Post.WorkerBean workerBean) {
-        Intent intent = new Intent(LoginWorkerActivity.this, ListPostActivity.class);
-        intent.putExtra("worker",workerBean);
+        mW = workerBean;
         SharedPreferences mySharedPreferences = getSharedPreferences("workerData",
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
@@ -75,12 +79,20 @@ public class LoginWorkerActivity extends BaseActivity {
         editor.putString("workerId", workerBean.getPk());
         //提交当前数据
         editor.apply();
+
+
+    }
+
+    public void goActivity() {
+        Intent intent = new Intent(LoginWorkerActivity.this, ListPostActivity.class);
+        intent.putExtra("worker", mW);
         startActivity(intent);
     }
+
     //忘记密码
     public void fogetPassword(View view) {
         //跳转
-        Intent intent = new Intent(LoginWorkerActivity.this,NewPasswordActivity.class);
+        Intent intent = new Intent(LoginWorkerActivity.this, NewPasswordActivity.class);
         startActivity(intent);
     }
 }

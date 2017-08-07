@@ -181,18 +181,38 @@
                     <EditText
                         android:id="@+id/service_ed"
                         android:layout_width="0dp"
+                        android:focusableInTouchMode="false"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:hint="服务项目" />
 
-                    <Button
+
+                    <com.baiducloud.dawnoct.renovateproject.Wedgits.StateButton
                         android:id="@+id/service_in_post"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:onClick="chooseService"
+                        android:text="选择项目"
+                        android:textSize="17sp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"
                         android:tag="service"
-                        android:text="选择项目" />
+                        app:radius="10dp"
+                        app:animationDuration="200"
+                        app:strokeDashGap="0dp"
+                        app:strokeDashWidth="0dp"
+                        app:normalStrokeWidth="0dp"
+                        app:pressedStrokeWidth="0dp"
+                        app:unableStrokeWidth="0dp"
+                        app:normalStrokeColor="@android:color/white"
+                        app:pressedStrokeColor="@android:color/white"
+                        app:unableStrokeColor="@android:color/white"
+                        app:normalTextColor="@android:color/white"
+                        app:pressedTextColor="@android:color/white"
+                        app:unableTextColor="@android:color/white"
+                        app:normalBackgroundColor="@color/colorAccent"
+                        app:pressedBackgroundColor="@color/colorAccent"
+                        app:unableBackgroundColor="@color/colorAccent"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -218,7 +238,15 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:hint="面积" />
-
+                    <Button
+                        android:id="@+id/_post02"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="singlePost"
+                        android:tag="head"
+                        android:text="post"
+                        android:visibility="invisible" />
 
 
                 </LinearLayout>
@@ -245,15 +273,17 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:hint="预计工期" />
-
                     <Button
-                        android:id="@+id/predict_post"
+                        android:id="@+id/_post0"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClick="chooseDate"
+                        android:onClick="singlePost"
                         android:tag="head"
-                        android:text="选择日期" />
+                        android:text="post"
+                        android:visibility="invisible" />
+
+
 
                 </LinearLayout>
 
@@ -317,15 +347,32 @@
                         android:layout_weight="2"
                         android:hint="开工日期" />
 
-                    <Button
-                        android:id="@+id/create_post"
+                    <com.baiducloud.dawnoct.renovateproject.Wedgits.StateButton
+                        android:id="@+id/start_date"
+                        android:onClick="chooseDate"
+                        android:tag="startDate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:text="日期"
+                        android:textSize="17sp"
                         android:layout_weight="1"
-                        android:onClick="singlePost"
-                        android:tag="head"
-                        android:text="post"
-                        android:visibility="invisible" />
+                        android:layout_gravity="center_horizontal"
+                        app:radius="10dp"
+                        app:animationDuration="200"
+                        app:strokeDashGap="0dp"
+                        app:strokeDashWidth="0dp"
+                        app:normalStrokeWidth="0dp"
+                        app:pressedStrokeWidth="0dp"
+                        app:unableStrokeWidth="0dp"
+                        app:normalStrokeColor="@android:color/white"
+                        app:pressedStrokeColor="@android:color/white"
+                        app:unableStrokeColor="@android:color/white"
+                        app:normalTextColor="@android:color/white"
+                        app:pressedTextColor="@android:color/white"
+                        app:unableTextColor="@android:color/white"
+                        app:normalBackgroundColor="@color/colorAccent"
+                        app:pressedBackgroundColor="@color/colorAccent"
+                        app:unableBackgroundColor="@color/colorAccent"/>
 
                 </LinearLayout>
 
@@ -353,14 +400,33 @@
                         android:layout_weight="2"
                         android:hint="项目状态" />
 
-                    <Button
-                        android:id="@+id/state_post"
+
+                    <com.baiducloud.dawnoct.renovateproject.Wedgits.StateButton
+                        android:id="@+id/state_change"
+                        android:onClick="stateChange"
+                        android:tag="state"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:text="状态"
+                        android:textSize="17sp"
                         android:layout_weight="1"
-                        android:onClick="chooseState"
-                        android:text="修改状态" />
-
+                        android:layout_gravity="center_horizontal"
+                        app:radius="10dp"
+                        app:animationDuration="200"
+                        app:strokeDashGap="0dp"
+                        app:strokeDashWidth="0dp"
+                        app:normalStrokeWidth="0dp"
+                        app:pressedStrokeWidth="0dp"
+                        app:unableStrokeWidth="0dp"
+                        app:normalStrokeColor="@android:color/white"
+                        app:pressedStrokeColor="@android:color/white"
+                        app:unableStrokeColor="@android:color/white"
+                        app:normalTextColor="@android:color/white"
+                        app:pressedTextColor="@android:color/white"
+                        app:unableTextColor="@android:color/white"
+                        app:normalBackgroundColor="@color/colorAccent"
+                        app:pressedBackgroundColor="@color/colorAccent"
+                        app:unableBackgroundColor="@color/colorAccent"/>
                 </LinearLayout>
 
                 <Button

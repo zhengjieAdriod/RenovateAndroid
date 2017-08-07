@@ -77,6 +77,10 @@ dependencies {
     compile 'com.github.SuperKotlin:PictureViewer:1.0.1'
     //预加载的占位
     compile 'com.ethanhua:skeleton:0.2.0'
+    //百分比布局
+    compile 'com.android.support:percent:25.3.1'
+    //日历
+    compile 'com.prolificinteractive:material-calendarview:1.4.3'
 
 
 

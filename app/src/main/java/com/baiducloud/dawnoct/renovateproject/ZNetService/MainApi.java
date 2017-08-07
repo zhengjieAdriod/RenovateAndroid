@@ -128,11 +128,18 @@ public interface MainApi {
     @POST("add_call_back/")
     @Headers("content-type': 'application/json")
     Observable<RespondedInfo> addCallBack(@Field("param") String s);
+
     /**
      * 业主登录
      */
     @GET("owner_login/")
-    Observable<RespondedInfo> ownerLoign(@Query("telephone") String telephone,@Query("password") String password);
+    Observable<RespondedInfo> ownerLoign(@Query("telephone") String telephone, @Query("password") String password);
+
+    /**
+     * 获得服务列表
+     */
+    @GET("get_services/")
+    Observable<RespondedInfo> getServices();
 }
 
 

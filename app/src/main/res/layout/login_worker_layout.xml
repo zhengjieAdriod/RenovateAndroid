@@ -32,6 +32,7 @@
             android:layout_marginLeft="30px"
             android:background="@null"
             android:hint="用户名"
+            android:text="110"
             android:textColor="#d8d8d8"
             android:textColorHint="#d8d8d8"
             android:textSize="32px" />
@@ -63,6 +64,7 @@
             android:layout_marginLeft="30px"
             android:background="@null"
             android:hint="密码"
+            android:text="111"
             android:inputType="textPassword"
             android:textColor="#d8d8d8"
             android:textColorHint="#d8d8d8"
