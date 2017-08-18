@@ -8,11 +8,14 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/NiceVieoPlayer" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/jsAdroid" />
             <option value="$PROJECT_DIR$/library_downMenue" />
             <option value="$PROJECT_DIR$/pictruetest" />
             <option value="$PROJECT_DIR$/recyclerViewlibrary" />
-            <option value="$PROJECT_DIR$/skeleton" />
+            <option value="$PROJECT_DIR$/wunlun" />
+            <option value="$PROJECT_DIR$/wxdemo" />
             <option value="$PROJECT_DIR$/wxtest" />
           </set>
         </option>

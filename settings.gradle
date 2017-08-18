@@ -1,1 +1,1 @@
-include ':app', ':recyclerViewlibrary', ':library_downMenue', ':pictruetest', ':skeleton', ':wxtest'
+include ':app', ':recyclerViewlibrary', ':library_downMenue', ':pictruetest', ':NiceVieoPlayer', ':wxtest', ':wunlun', ':wxdemo', ':jsAdroid'

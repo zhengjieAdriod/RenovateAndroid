@@ -1,6 +1,10 @@
 package com.baiducloud.dawnoct.renovateproject.Modules.LoginWorker;
 
+import android.media.MediaPlayer;
 import android.util.Log;
+import android.view.SurfaceView;
+import android.view.TextureView;
+import android.widget.VideoView;
 
 import com.baiducloud.dawnoct.renovateproject.Views.BaseActivity;
 import com.baiducloud.dawnoct.renovateproject.ZNetService.RetrofitService;
@@ -38,9 +42,7 @@ public class LoginWorkerPresenter {
             @Override
             public void onError(Throwable e) {
                 Log.e("zj", "");
-
             }
-// change me us you and me just do it and u
             @Override
             public void onNext(RespondedInfo info) {
                 if ("200".equals(info.getCode())) {
@@ -48,6 +50,7 @@ public class LoginWorkerPresenter {
                         mView.netSecces(info.getWorker());
                         Log.e("zj", "登录完成");
                     } else if (info.getServices() != null && info.getServices().size() > 0) {
+                        //成功回调
                         GlobalData.updateServices(info.getServices());
                         Log.e("zj", "服务拉取完成");
                     }
@@ -55,6 +58,10 @@ public class LoginWorkerPresenter {
             }
         });
     }
+//    MediaPlayer f;
+//    VideoView d;
+//    TextureView
+//    SurfaceView
     private Observable getLogin(String tele,String password) {
         return RetrofitService.workerLogin(tele, password);
     }
@@ -67,7 +74,7 @@ public class LoginWorkerPresenter {
         workerLoginObservable.subscribe(new Subscriber<RespondedInfo>() {
             @Override
             public void onCompleted() {
-                Log.e("zj", "");
+                Log.e("zj", "nieiniadsfnininfsf");
             }
 
             @Override
